@@ -5,7 +5,7 @@
         <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action="" class="mt-4 login-form">
           <h2 class="form-title">Iniciar Sesión</h2>
           <div class="form-group">
-            <label for="emailLogin">Correo Electrónico:</label>
+            <label for="emailLogin">Email:</label>
             <input type="email" class="form-control" id="emailLogin" v-model="email" />
           </div>
           <div class="form-group">
