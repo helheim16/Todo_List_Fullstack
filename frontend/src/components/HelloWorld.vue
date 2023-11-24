@@ -2,17 +2,18 @@
   <div class="container my-4">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action="" class="mt-4 login-form">
-          <h2 class="form-title">Iniciar Sesión</h2>
+        <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action=""   class="mt-4 login-form  card  border-primary">
+          <h1>Iniciar Sesión</h1>
           <div class="form-group">
-            <label for="emailLogin">Email:</label>
+            <label for="emailLogin"  class="form-label mt-4">Email:</label>
             <input type="email" class="form-control" id="emailLogin" v-model="email" />
           </div>
           <div class="form-group">
-            <label for="passwordLogin">Contraseña:</label>
+            <label for="passwordLogin"  class="form-label mt-4">Contraseña:</label>
             <input type="password" class="form-control" id="passwordLogin" v-model="password" />
           </div>
-          <button type="submit" class="btn btn-success mt-4">
+          <br>
+          <button type="submit" class="btn btn-outline-primary">
             Iniciar Sesión
           </button>
           <p class="mt-2">
@@ -24,10 +25,10 @@
           </p> -->
         </form>
 
-        <form v-else-if="mostrarFormulario === 'registro'" @submit.prevent="register" class="mt-4 register-form">
+        <form v-else-if="mostrarFormulario === 'registro'" @submit.prevent="register" class="mt-4 register-form  card  border-primary" >
           <h2 class="form-title">Registrarse</h2>
           <div class="form-group">
-            <label for="emailRegister">Correo Electrónico:</label>
+            <label for="emailRegister">Email:</label>
             <input type="email" class="form-control" id="emailRegister" v-model="emailSign" />
           </div>
           <div class="form-group">
@@ -38,7 +39,8 @@
             <label for="passwordRepeat">Repetir Contraseña:</label>
             <input type="password" class="form-control" id="passwordRepeat" v-model="passwordCompare" />
           </div>
-          <button type="submit" class="btn btn-success mt-4">
+          <br>
+          <button type="submit" class="btn btn-outline-success">
             Registrarse
           </button>
           <p class="mt-2">
@@ -149,5 +151,12 @@ export default class Registro extends Vue {
 </script>
 
 <style scoped>
+.login-form,
+.register-form {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
 
 </style>
