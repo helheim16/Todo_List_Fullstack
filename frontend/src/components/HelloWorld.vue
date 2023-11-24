@@ -149,53 +149,5 @@ export default class Registro extends Vue {
 </script>
 
 <style scoped>
-.login-form,
-.register-form,
-.recovery-form {
-  background-color: rgb(231, 243, 227);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
 
-.login-form:hover,
-.register-form:hover,
-.recovery-form:hover {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-}
-
-.form-title {
-  color: #333;
-  font-size: 1.5em;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
-  color: #555;
-}
-
-.btn-success,
-.btn-info {
-  background-color: #4caf50;
-  border: none;
-}
-
-.btn-success:hover,
-.btn-info:hover {
-  background-color: #81c42a;
-}
-
-.btn-success:active,
-.btn-info:active {
-  background-color: #3e8e41;
-}
-
-.custom-btn {
-  color: #fff !important;
-}
 </style>
