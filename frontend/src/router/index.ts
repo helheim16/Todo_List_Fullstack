@@ -1,8 +1,23 @@
 import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
+import VueRouter, { NavigationGuard, RouteConfig } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import {auth} from '../../firebaseconfig'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
+
+
+// guarda la navegacion para verficar la autentificacioón 
+const requireAuth: NavigationGuard = function (to, from,next){
+  const isAuthenticated = auth.currentUser; 
+  if(isAuthenticated){
+    // si el usaurio esta autentidaco, permite el acceso a la ruta 
+    next();
+  }
+  else{
+    // si el usuario no esta autentificado, redirige a la pagina de inicar sesion 
+    next('/');
+  }
+}
 
 const routes: Array<RouteConfig> = [
   {
