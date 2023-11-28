@@ -2,32 +2,35 @@
   <div class="container my-4">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action="" class="mt-4 login-form">
-          <h2 class="form-title">Iniciar Sesión</h2>
+        <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action=""
+          class="mt-4 login-form  card  border-primary">
+          <h1>Iniciar Sesión</h1>
           <div class="form-group">
-            <label for="emailLogin">Email:</label>
+            <label for="emailLogin" class="form-label mt-4">Email:</label>
             <input type="email" class="form-control" id="emailLogin" v-model="email" />
           </div>
           <div class="form-group">
-            <label for="passwordLogin">Contraseña:</label>
+            <label for="passwordLogin" class="form-label mt-4">Contraseña:</label>
             <input type="password" class="form-control" id="passwordLogin" v-model="password" />
           </div>
-          <button type="submit" class="btn btn-success mt-4">
+          <br>
+          <button type="submit" class="btn btn-outline-primary">
             Iniciar Sesión
           </button>
           <p class="mt-2">
             ¿No tienes una cuenta?
             <a href="#" @click="cambiarFormulario('registro')">Regístrate</a>
           </p>
-          <!-- <p class="mt-2">
+          <p class="mt-2">
             <a href="#" @click="cambiarFormulario('recuperar')">¿Olvidaste tu contraseña?</a>
-          </p> -->
+          </p>
         </form>
 
-        <form v-else-if="mostrarFormulario === 'registro'" @submit.prevent="register" class="mt-4 register-form">
+        <form v-else-if="mostrarFormulario === 'registro'" @submit.prevent="register"
+          class="mt-4 register-form  card  border-primary">
           <h2 class="form-title">Registrarse</h2>
           <div class="form-group">
-            <label for="emailRegister">Correo Electrónico:</label>
+            <label for="emailRegister">Email:</label>
             <input type="email" class="form-control" id="emailRegister" v-model="emailSign" />
           </div>
           <div class="form-group">
@@ -38,7 +41,8 @@
             <label for="passwordRepeat">Repetir Contraseña:</label>
             <input type="password" class="form-control" id="passwordRepeat" v-model="passwordCompare" />
           </div>
-          <button type="submit" class="btn btn-success mt-4">
+          <br>
+          <button type="submit" class="btn btn-outline-success">
             Registrarse
           </button>
           <p class="mt-2">
@@ -47,7 +51,7 @@
           </p>
         </form>
 
-        <!-- <form v-else @submit.prevent="forgotPassword" class="mt-4 recovery-form">
+        <form v-else @submit.prevent="forgotPassword" class="mt-4 recovery-form">
           <h2 class="form-title">¿Olvidaste tu Contraseña?</h2>
           <div class="form-group">
             <label for="emailForgot">Correo Electrónico:</label>
@@ -55,12 +59,12 @@
           </div>
           <button type="submit" class="btn btn-info mt-4 custom-btn">
             Enviar Correo de Recuperación
-          </button> -->
-          <!-- <p class="mt-2">
+          </button>
+          <p class="mt-2">
             ¿Recuerdas tu contraseña?
             <a href="#" @click="cambiarFormulario('login')">Iniciar Sesión</a>
           </p>
-        </form> -->
+        </form>
       </div>
     </div>
   </div>
@@ -69,9 +73,10 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { auth } from "../../firebaseconfig";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail,
+import {
+  createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail,
 } from "firebase/auth";
-
+import Swal from 'sweetalert2';
 @Component
 export default class Registro extends Vue {
   mostrarFormulario: string = "login";
@@ -87,10 +92,19 @@ export default class Registro extends Vue {
       .then((credenciales) => {
         const user = credenciales.user;
         console.log(user);
-        window.alert("Inicio de sesión Exitoso");
+        Swal.fire({
+            title: "¡Buen trabajo!",
+            text: "Inicio de sesión Exitoso",
+            icon: "success"
+          });
+        // this.$router.push(/home);
       })
       .catch((error) => {
-        window.alert("Fallo el Inicio de Sesión");
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Fallo el Inicio de Sesión "
+          });
         console.error(error);
       });
   }
@@ -98,7 +112,11 @@ export default class Registro extends Vue {
   register() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.emailSign)) {
-      window.alert("Correo electrónico inválido");
+      Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Email inválido "
+          });
       return;
     }
 
@@ -107,17 +125,30 @@ export default class Registro extends Vue {
         .then((credenciales) => {
           const user = credenciales.user;
           console.log(user);
-          window.alert("Registro Exitoso");
-
+          Swal.fire({
+            title: "¡Buen trabajo!",
+            text: "!Registro Exitoso!",
+            icon: "success"
+          });
           this.passwordSign = "";
           this.passwordCompare = "";
         })
         .catch((error) => {
-          window.alert("Fallo el Registro");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "A fallado el registro",
+            footer: 'Intente de nuevo'
+          });
           console.error(error);
         });
     } else {
-      window.alert("Las contraseñas no coinciden");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No coinciden las contraseñas",
+        // footer: '<a href="#">Why do I have this issue?</a>'
+      });
       this.passwordSign = "";
       this.passwordCompare = "";
     }
@@ -126,20 +157,32 @@ export default class Registro extends Vue {
   forgotPassword() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.emailForgot)) {
-      window.alert("Correo electrónico inválido");
+      Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Email inválido "
+          });
       return;
     }
 
-    // sendPasswordResetEmail(auth, this.emailForgot)
-    //   .then(() => {
-    //     window.alert("Correo de recuperación enviado exitosamente");
-    //     this.emailForgot = "";
-    //     this.mostrarFormulario = "login";
-    //   })
-    //   .catch((error) => {
-    //     window.alert("Error al enviar el correo de recuperación");
-    //     console.error(error);
-    //   });
+    sendPasswordResetEmail(auth, this.emailForgot)
+      .then(() => {
+        Swal.fire({
+            title: "Perfecto!",
+            text: "Correo de recuperación enviado exitosamente",
+            icon: "success"
+          });
+        this.emailForgot = "";
+        this.mostrarFormulario = "login";
+      })
+      .catch((error) => {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Error al enviar el correo de recuperación"
+          });
+        console.error(error);
+      });
   }
 
   cambiarFormulario(formulario: string) {
@@ -149,5 +192,11 @@ export default class Registro extends Vue {
 </script>
 
 <style scoped>
-
+.login-form,
+.register-form {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
 </style>
