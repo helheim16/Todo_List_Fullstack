@@ -6,7 +6,7 @@ const controller = require('../controllers/tarea_controller');
 router.get('/', controller.obtenerTareas);
 
 // Retorna la tarea solicitada 
-router.get('/', controller.obtenerTareas);
+router.get('/:id', controller.obtenerTareas);
 
 // Crea una nueva tarea
 router.post('/', controller.crearTarea);
