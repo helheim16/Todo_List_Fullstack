@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
       <div class="container-fluid">
         <img src="../assets/todo.png" alt="...">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03"
@@ -13,9 +13,8 @@
               <a class="nav-link text-white" href="#">usuario@usuario.com</a>
             </li>
           </ul>
-          <form class="d-flex">
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">Cerrar Sesion</button>
-          </form>
+          <!-- Btn cerrar sesion -->
+          <LogOut />
         </div>
       </div>
     </nav>
@@ -71,7 +70,7 @@
               </li>
             </ul>
 
-            <div v-if="editandoTarea">
+            <div>
               <h3>Editar Tarea</h3>
               <div class="form-group">
                     <label for="" class="col-sm-2 col-form-label ">Titulo</label>
@@ -102,35 +101,39 @@
   
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import LogOut from "../components/btnmefui.vue"
 //   import axios from "axios";
 
 interface Tarea {
   _id: string;
   titulo: string;
   cuerpo: string;
-  fecha: string;
   completado: boolean;
 }
 
+export default{
+  components:{
+    LogOut,
+  }
+}
+
 @Component
-export default class Hello extends Vue {
+export class Hello extends Vue {
   tarea: Tarea[] = [];
   editandoTarea: string | null = null;
   tareaEditada: Tarea = {
     _id: "",
     titulo: "",
     cuerpo: "",
-    fecha: "",
     completado: false,
   };
   nuevaTarea: Tarea = {
     _id: "",
     titulo: "",
     cuerpo: "",
-    fecha: "",
     completado: false,
   };
-
+  
 }
 </script>
 <style scoped>
