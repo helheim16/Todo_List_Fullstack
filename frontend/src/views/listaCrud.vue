@@ -118,7 +118,7 @@ export default{
 }
 
 @Component
-export class Hello extends Vue {
+export class Crud extends Vue {
   tarea: Tarea[] = [];
   editandoTarea: string | null = null;
   tareaEditada: Tarea = {

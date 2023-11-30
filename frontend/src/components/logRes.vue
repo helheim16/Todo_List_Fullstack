@@ -2,9 +2,10 @@
   <div class="container my-4">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        
+
         <img src="../assets/lista2.png" alt="..." class="img-thumbnail">
-        <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action="" class="mt-4 login-form  card  border-primary">
+        <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action=""
+          class="mt-4 login-form  card  border-primary">
           <h1>Iniciar Sesión</h1>
           <div class="form-group">
             <label for="emailLogin" class="form-label mt-4">Email:</label>
@@ -43,7 +44,7 @@
             <input type="password" class="form-control" id="passwordRepeat" v-model="passwordCompare" />
           </div>
           <br>
-          <button type="submit" class="btn btn-outline-success" >
+          <button type="submit" class="btn btn-outline-success">
             Registrarse
           </button>
           <p class="mt-2">
@@ -78,6 +79,7 @@ import {
   createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail,
 } from "firebase/auth";
 import Swal from 'sweetalert2';
+import router from "../router/index";
 @Component
 export default class Registro extends Vue {
   mostrarFormulario: string = "login";
@@ -94,18 +96,18 @@ export default class Registro extends Vue {
         const user = credenciales.user;
         console.log(user);
         Swal.fire({
-            title: "¡Buen trabajo!",
-            text: "Inicio de sesión Exitoso",
-            icon: "success"
-          });
-        // this.$router.push(/home);
+          title: "¡Buen trabajo!",
+          text: "Inicio de sesión Exitoso",
+          icon: "success"
+        });
+        router.push('/lista');
       })
       .catch((error) => {
         Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Fallo el Inicio de Sesión "
-          });
+          icon: "error",
+          title: "Oops...",
+          text: "Fallo el Inicio de Sesión "
+        });
         console.error(error);
       });
   }
@@ -114,10 +116,10 @@ export default class Registro extends Vue {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.emailSign)) {
       Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Email inválido "
-          });
+        icon: "error",
+        title: "Oops...",
+        text: "Email inválido "
+      });
       return;
     }
 
@@ -133,6 +135,7 @@ export default class Registro extends Vue {
           });
           this.passwordSign = "";
           this.passwordCompare = "";
+          this.cambiarFormulario('login');
         })
         .catch((error) => {
           Swal.fire({
@@ -159,10 +162,10 @@ export default class Registro extends Vue {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.emailForgot)) {
       Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Email inválido "
-          });
+        icon: "error",
+        title: "Oops...",
+        text: "Email inválido "
+      });
       return;
     }
 
