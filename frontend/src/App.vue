@@ -5,14 +5,10 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "./components/logRes.vue";
-import Hello from "./components/listaCrud.vue";
+
 
 @Component({
-  components: {
-    HelloWorld,
-    Hello,
-  },
+ 
 })
 export default class App extends Vue {}
 </script>

@@ -1,91 +1,164 @@
 <template>
-    <div class="">
-      <h1>Lista de tareas</h1>
-      <ul>
-        <li
-          v-for="tareaItem in tarea"
-          :key="tareaItem._id"
-        >
-       
-          <br />
-          <button>Editar</button>
-          <button >Eliminar</button>
-        </li>
-      </ul>
-  
-      <div v-if="editandoTarea">
-        <h3>Editar Tarea</h3>
-        <label>Título</label>
-        <input v-model="tareaEditada.titulo" />
-        <br />
-        <label>Fecha</label>
-        <input
-          type="date"
-          v-model="tareaEditada.fecha"
-        />
-        <br />
-        <label>Cuerpo</label>
-        <textarea v-model="tareaEditada.cuerpo"></textarea>
-        <br />
-        <label>Completada</label>
-        <input
-          type="checkbox"
-          v-model="tareaEditada.completado"
-        />
-        <br />
-        <button>Guardar Cambios</button>
+  <div>
+    <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
+      <div class="container-fluid">
+        <img src="../assets/todo.png" alt="...">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03"
+          aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor03">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">usuario@usuario.com</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Cerrar Sesion</button>
+          </form>
+        </div>
       </div>
+    </nav>
+    <br>
+    <div class="container my-4">
+      <div class="row   justify-content-center">
+        <div class="bg-light ">
+          <div class="form-group row">
+            <details>
+              <summary>Nuevo</summary>
+              <form>
+                <fieldset>
+                  <div class="form-group">
+                    <label for="" class="col-sm-2 col-form-label ">Titulo</label>
+                    <input type="text" class="form-control" id="" />
+                  </div>
+                  <div class="form-group mt-3">
+                    <label for="" class="col-sm-2 col-form-label">Descripcion</label>
+                    <input type="text" class="form-control" id="" />
+                  </div>
+                  <br>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                    <label class="form-check " for="optionsRadios2">
+                      ¿Importante?
+                    </label>
+
+                  </div>
+                  <button type="submit" class="btn  btn-success">Crear</button>
+                </fieldset>
+              </form>
+
+            </details>
+
+
+            <div class="input-group rounded buscando">
+              <input type="search" class="form-control me-sm-2" placeholder="Search" aria-label="Search"
+                aria-describedby="search-addon" />
   
-      <div>
-        <h3>Nueva Tarea</h3>
-        <label>Título</label>
-        <input v-model="nuevaTarea.titulo" />
-        <br />
-        <label>Fecha</label>
-        <input
-          type="date"
-          v-model="nuevaTarea.fecha"
-        />
-        <br />
-        <label>Cuerpo</label>
-        <textarea v-model="nuevaTarea.cuerpo"></textarea>
-        <br />
-        <button >Crear Tarea</button>
+            </div>
+
+          </div>
+          <div class=" card-body  bg-primary text-white">
+            <h1>Lista de tareas</h1>
+            <ul>
+              <!-- v-for="tareaItem in tarea" :key="tareaItem._id" -->
+              <li >
+                hola
+                <br />
+                <button>Editar</button>
+                <button>Eliminar</button>
+              </li>
+            </ul>
+
+            <div v-if="editandoTarea">
+              <h3>Editar Tarea</h3>
+              <div class="form-group">
+                    <label for="" class="col-sm-2 col-form-label ">Titulo</label>
+                    <input type="text" class="form-control" id="" />
+                  </div>
+                  <div class="form-group mt-3">
+                    <label for="" class="col-sm-2 col-form-label">Descripcion</label>
+                    <input type="text" class="form-control" id="" />
+                  </div>
+                  <br>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                    <label class="form-check" for="optionsRadios2">
+                      ¿Importante?
+                    </label>
+
+                  </div>
+                  <button type="submit" class="btn  btn-success">Guardar Cambios</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </template>
+
+  </div>
+</template>
   
-  <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 //   import axios from "axios";
-  
-  interface Tarea {
-    _id: string;
-    titulo: string;
-    cuerpo: string;
-    fecha: string;
-    completado: boolean;
-  }
-  
-  @Component
-  export default class Hello extends Vue {
-    tarea: Tarea[] = [];
-    editandoTarea: string | null = null;
-    tareaEditada: Tarea = {
-      _id: "",
-      titulo: "",
-      cuerpo: "",
-      fecha: "",
-      completado: false,
-    };
-    nuevaTarea: Tarea = {
-      _id: "",
-      titulo: "",
-      cuerpo: "",
-      fecha: "",
-      completado: false,
-    };
-  
-  }
-  </script>
-  
+
+interface Tarea {
+  _id: string;
+  titulo: string;
+  cuerpo: string;
+  fecha: string;
+  completado: boolean;
+}
+
+@Component
+export default class Hello extends Vue {
+  tarea: Tarea[] = [];
+  editandoTarea: string | null = null;
+  tareaEditada: Tarea = {
+    _id: "",
+    titulo: "",
+    cuerpo: "",
+    fecha: "",
+    completado: false,
+  };
+  nuevaTarea: Tarea = {
+    _id: "",
+    titulo: "",
+    cuerpo: "",
+    fecha: "",
+    completado: false,
+  };
+
+}
+</script>
+<style scoped>
+.buscando{
+width: 30%;
+padding:1rem;
+float: right;
+
+}
+details {
+  background: #f2f2f2;
+  width: 30%;
+  padding: 0.90rem;
+  margin: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+summary {
+  list-style: none;
+}
+
+summary::before {
+  content: '+';
+  padding-right: 1rem;
+}
+
+details[open] summary::before {
+  content: '-';
+}
+</style>

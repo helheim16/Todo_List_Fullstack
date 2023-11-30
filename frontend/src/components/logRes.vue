@@ -2,8 +2,9 @@
   <div class="container my-4">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action=""
-          class="mt-4 login-form  card  border-primary">
+        
+        <img src="../assets/lista2.png" alt="..." class="img-thumbnail">
+        <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action="" class="mt-4 login-form  card  border-primary">
           <h1>Iniciar Sesión</h1>
           <div class="form-group">
             <label for="emailLogin" class="form-label mt-4">Email:</label>
@@ -18,12 +19,12 @@
             Iniciar Sesión
           </button>
           <p class="mt-2">
-            ¿No tienes una cuenta?
-            <a href="#" @click="cambiarFormulario('registro')">Regístrate</a>
+            Aquí te puedes
+            <a href="#" @click="cambiarFormulario('registro')">Regístrar</a>
           </p>
-          <p class="mt-2">
+          <!-- <p class="mt-2">
             <a href="#" @click="cambiarFormulario('recuperar')">¿Olvidaste tu contraseña?</a>
-          </p>
+          </p> -->
         </form>
 
         <form v-else-if="mostrarFormulario === 'registro'" @submit.prevent="register"
@@ -42,7 +43,7 @@
             <input type="password" class="form-control" id="passwordRepeat" v-model="passwordCompare" />
           </div>
           <br>
-          <button type="submit" class="btn btn-outline-success">
+          <button type="submit" class="btn btn-outline-success" >
             Registrarse
           </button>
           <p class="mt-2">
@@ -165,24 +166,24 @@ export default class Registro extends Vue {
       return;
     }
 
-    sendPasswordResetEmail(auth, this.emailForgot)
-      .then(() => {
-        Swal.fire({
-            title: "Perfecto!",
-            text: "Correo de recuperación enviado exitosamente",
-            icon: "success"
-          });
-        this.emailForgot = "";
-        this.mostrarFormulario = "login";
-      })
-      .catch((error) => {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Error al enviar el correo de recuperación"
-          });
-        console.error(error);
-      });
+    // sendPasswordResetEmail(auth, this.emailForgot)
+    //   .then(() => {
+    //     Swal.fire({
+    //         title: "Perfecto!",
+    //         text: "Correo de recuperación enviado exitosamente",
+    //         icon: "success"
+    //       });
+    //     this.emailForgot = "";
+    //     this.mostrarFormulario = "login";
+    //   })
+    //   .catch((error) => {
+    //     Swal.fire({
+    //         icon: "error",
+    //         title: "Oops...",
+    //         text: "Error al enviar el correo de recuperación"
+    //       });
+    //     console.error(error);
+    //   });
   }
 
   cambiarFormulario(formulario: string) {
