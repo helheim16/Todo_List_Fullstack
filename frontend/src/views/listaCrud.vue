@@ -23,7 +23,8 @@
       <div class="row   justify-content-center">
         <div class="bg-light  rounded">
           <div class="form-group row">
-            <details>
+            <!-- <button type="button" class="btn btn-outline-primary" @click="cambiarFormulario()">Crear</button> -->
+            <!-- <details>
               <summary>Nuevo</summary>
               <form>
                 <fieldset>
@@ -48,7 +49,7 @@
                 </fieldset>
               </form>
 
-            </details>
+            </details> -->
 
 
             <div class="input-group rounded buscando">
@@ -58,6 +59,45 @@
             </div>
 
           </div>
+          <div >
+            <!-- <form  v-if=" mostrarFormulario"  @submit.prevent  > -->
+                <fieldset>
+                  <div class="form-group">
+                    <label for="" class="col-sm-2 col-form-label ">Titulo</label>
+                    <input type="text" class="form-control" id="" />
+                  </div>
+                  <div class="form-group mt-3">
+                    <label for="" class="col-sm-2 col-form-label">Descripcion</label>
+                    <input type="text" class="form-control" id="" />
+                  </div>
+                  <br>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                    <label class="form-check " for="optionsRadios2">
+                      ¿Importante?
+                    </label>
+
+                  </div>
+                  <button type="submit" class="btn  btn-success">Crear</button>
+                </fieldset>
+              <!-- </form> -->
+          </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
           <div class=" card-body  bg-primary text-white">
             <h1>Lista de tareas</h1>
             <ul>
@@ -119,6 +159,7 @@ export default{
 
 @Component
 export class Crud extends Vue {
+  mostrarFormulario: boolean= false;
   tarea: Tarea[] = [];
   editandoTarea: string | null = null;
   tareaEditada: Tarea = {
@@ -133,7 +174,13 @@ export class Crud extends Vue {
     cuerpo: "",
     completado: false,
   };
-  
+
+  newTask(){
+
+  }
+  cambiarFormulario(verFormulario:boolean) {
+    this.mostrarFormulario=verFormulario;
+  }
 }
 </script>
 <style scoped>

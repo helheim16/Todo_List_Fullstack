@@ -4,8 +4,7 @@
       <div class="col-md-6">
 
         <img src="../assets/lista2.png" alt="..." class="img-thumbnail">
-        <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action=""
-          class="mt-4 login-form  card  border-primary">
+        <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action="" class="mt-4 login-form  card  border-primary">
           <h1>Iniciar Sesión</h1>
           <div class="form-group">
             <label for="emailLogin" class="form-label mt-4">Email:</label>
@@ -60,7 +59,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import { auth } from "../../firebaseconfig";
 import {
-  createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail,
+  createUserWithEmailAndPassword, signInWithEmailAndPassword,
 } from "firebase/auth";
 import Swal from 'sweetalert2';
 import router from "../router/index";
