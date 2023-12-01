@@ -23,7 +23,7 @@
       <div class="row   justify-content-center">
         <div class="bg-light  rounded">
           <div class="form-group row">
-            <!-- <button type="button" class="btn btn-outline-primary" @click="cambiarFormulario()">Crear</button> -->
+            <button type="button" class="btn btn-outline-primary" @click="cambiarFormulario()">{{mostrarFormulario ? "Ocultar" : "Crear"}}</button>
             <!-- <details>
               <summary>Nuevo</summary>
               <form>
@@ -60,7 +60,7 @@
 
           </div>
           <div >
-            <!-- <form  v-if=" mostrarFormulario"  @submit.prevent  > -->
+            <form v-if="mostrarFormulario" @submit.prevent="newTask()"  >
                 <fieldset>
                   <div class="form-group">
                     <label for="" class="col-sm-2 col-form-label ">Titulo</label>
@@ -81,23 +81,8 @@
                   </div>
                   <button type="submit" class="btn  btn-success">Crear</button>
                 </fieldset>
-              <!-- </form> -->
+              </form>
           </div>
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
           <div class=" card-body  bg-primary text-white">
             <h1>Lista de tareas</h1>
             <ul>
@@ -142,7 +127,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import LogOut from "../components/btnmefui.vue"
-//   import axios from "axios";
+// import axios from "axios";
 
 interface Tarea {
   _id: string;
@@ -151,14 +136,13 @@ interface Tarea {
   completado: boolean;
 }
 
-export default{
-  components:{
+@Component({
+  components: {
     LogOut,
-  }
-}
+  },
+})
 
-@Component
-export class Crud extends Vue {
+export default class Crud extends Vue {
   mostrarFormulario: boolean= false;
   tarea: Tarea[] = [];
   editandoTarea: string | null = null;
@@ -175,11 +159,10 @@ export class Crud extends Vue {
     completado: false,
   };
 
-  newTask(){
-
+  newTask(): void{
   }
-  cambiarFormulario(verFormulario:boolean) {
-    this.mostrarFormulario=verFormulario;
+  cambiarFormulario(): void {
+    this.mostrarFormulario= !this.mostrarFormulario;
   }
 }
 </script>
