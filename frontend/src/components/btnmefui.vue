@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex">
-        <button class="btn btn-primary my-2 my-sm-0" @click="logOut">Cerrar Sesion</button>
+        <button type="button" class="btn btn-outline-light" @click="logOut">Cerrar Sesion</button>
     </div>
 </template>
 
@@ -14,19 +14,24 @@ export default class LogOut extends Vue {
     logOut() {
         auth.signOut().then(() => {
             Swal.fire({
-                title: "Usted  ha cerrado la sesion, Hasta la proxima",
+                title: "Usted  ha cerrado la sesion, Hasta la proxima!!",
                 width: 600,
+                position: "center-end",
                 padding: "3em",
                 color: "#716add",
-                background: "#fff url(https://sweetalert2.github.io/#themesimages/trees.png)",
+                background: "#fff ",
                 backdrop: `
                     rgba(0,0,123,0.4)
-                    url("https://sweetalert2.github.io/#themesimages/nyan-cat.gif")
+                    url("https://i.pinimg.com/originals/f3/0e/21/f30e21da146bd3501555eec943a8898e.gif")
                     left top
                     no-repeat`
+            }).then(result => {
+                if (result.isConfirmed) {
+                    router.push('/');
+                }
             });
             // alert('Cerraste sesion')
-            router.push('/');
+
         }).catch((error) => {
             console.error('Error al cerrar sesion:', error)
         });

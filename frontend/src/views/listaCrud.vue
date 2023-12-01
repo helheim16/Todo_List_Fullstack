@@ -21,7 +21,7 @@
     <br>
     <div class="container my-4">
       <div class="row   justify-content-center">
-        <div class="bg-light ">
+        <div class="bg-light  rounded">
           <div class="form-group row">
             <details>
               <summary>Nuevo</summary>
