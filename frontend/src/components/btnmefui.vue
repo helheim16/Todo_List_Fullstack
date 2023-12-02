@@ -18,8 +18,8 @@ export default class LogOut extends Vue {
                 width: 600,
                 position: "center-end",
                 padding: "3em",
-                color: "#716add",
-                background: "#fff ",
+                color: " #44dbeb",
+                background: " #1a0b34",
                 backdrop: `
                     rgba(0,0,123,0.4)
                     url("https://i.pinimg.com/originals/f3/0e/21/f30e21da146bd3501555eec943a8898e.gif")

@@ -22,44 +22,22 @@
     <div class="container my-4">
       <div class="row   justify-content-center">
         <div class="bg-light  rounded">
-          <div class="form-group row">
-            <button type="button" class="btn btn-outline-primary" @click="cambiarFormulario()">{{mostrarFormulario ? "Ocultar" : "Crear"}}</button>
-            <!-- <details>
-              <summary>Nuevo</summary>
-              <form>
-                <fieldset>
-                  <div class="form-group">
-                    <label for="" class="col-sm-2 col-form-label ">Titulo</label>
-                    <input type="text" class="form-control" id="" />
-                  </div>
-                  <div class="form-group mt-3">
-                    <label for="" class="col-sm-2 col-form-label">Descripcion</label>
-                    <input type="text" class="form-control" id="" />
-                  </div>
-                  <br>
-
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                    <label class="form-check " for="optionsRadios2">
-                      ¿Importante?
-                    </label>
-
-                  </div>
-                  <button type="submit" class="btn  btn-success">Crear</button>
-                </fieldset>
-              </form>
-
-            </details> -->
-
-
+          <div class="form-group row" >
             <div class="input-group rounded buscando">
               <input type="search" class="form-control me-sm-2" placeholder="Search" aria-label="Search"
                 aria-describedby="search-addon" />
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
   
             </div>
 
-          </div>
-          <div >
+            <br>
+            <br>
+            <div  class="d-grid gap-2">
+              <button type="button" class="btn btn-outline-primary" @click="cambiarFormulario()">{{mostrarFormulario ? "Ocultar" : "Crear"}}</button>
+            </div>
+            
+           
+            <div class="bg-primary" data-bs-theme="dark">
             <form v-if="mostrarFormulario" @submit.prevent="newTask()"  >
                 <fieldset>
                   <div class="form-group">
@@ -83,19 +61,30 @@
                 </fieldset>
               </form>
           </div>
+           
+           
+           
+           
+           
+           
+           
+            
+
+          </div>
+         
           <div class=" card-body  bg-primary text-white">
             <h1>Lista de tareas</h1>
             <ul>
-              <!-- v-for="tareaItem in tarea" :key="tareaItem._id" -->
+              <!-- v-for="tareaItem in tarea" :key="tareaItem._id"
               <li >
                 hola
                 <br />
                 <button>Editar</button>
                 <button>Eliminar</button>
-              </li>
+              </li> -->
             </ul>
 
-            <div>
+            <!-- <div>
               <h3>Editar Tarea</h3>
               <div class="form-group">
                     <label for="" class="col-sm-2 col-form-label ">Titulo</label>
@@ -115,7 +104,7 @@
 
                   </div>
                   <button type="submit" class="btn  btn-success">Guardar Cambios</button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -173,6 +162,17 @@ padding:1rem;
 float: right;
 
 }
+/* input[type="text"],
+ input[type="email"],
+ input[type="number"], input[type="password"] {
+  display: block;
+  width: 40%;
+  margin-bottom: 20px;
+  padding: 15px 10px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  font-family: "Slabo 27px", serif;
+} */
 details {
   background: #f2f2f2;
   width: 30%;

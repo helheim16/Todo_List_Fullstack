@@ -4,15 +4,18 @@
       <div class="col-md-6">
 
         <img src="../assets/lista2.png" alt="..." class="img-thumbnail">
-        <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action="" class="mt-4 login-form  card  border-primary">
+        <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action=""
+          class="mt-4 login-form  card  border-primary">
           <h1>Iniciar Sesión</h1>
+          <br>
           <div class="form-group">
-            <label for="emailLogin" class="form-label mt-4">Email:</label>
-            <input type="email" class="form-control" id="emailLogin" v-model="email" />
+            <!-- <label for="emailLogin" class="form-label mt-4">Email:</label> -->
+            <input type="email" class="form-control" id="emailLogin" v-model="email" placeholder="Email"/>
           </div>
+          <br>
           <div class="form-group">
-            <label for="passwordLogin" class="form-label mt-4">Contraseña:</label>
-            <input type="password" class="form-control" id="passwordLogin" v-model="password" />
+            <!-- <label for="passwordLogin" class="form-label mt-4">Contraseña:</label> -->
+            <input type="password" class="form-control" id="passwordLogin" v-model="password" placeholder="Contraseña" />
           </div>
           <br>
           <button type="submit" class="btn btn-outline-primary">
@@ -29,17 +32,19 @@
           <h2 class="form-title">Registrarse</h2>
 
           <div class="form-group">
-            <label for="emailRegister" class="form-label mt-4">Email address</label>
-            <input type="email" class="form-control" id="emailRegister" v-model="emailSign">
+            <!-- <label for="emailRegister" class="form-label mt-4">Email address</label> -->
+            <input type="email" class="form-control" id="emailRegister" v-model="emailSign" placeholder="Email">
           </div>
+          <br>
           <div class="form-group">
-            <label for="passwordRegister">Contraseña:</label>
-            <input type="password" class="form-control" id="passwordRegister"  aria-describedby="passwordHelp" v-model="passwordSign" />
+            <!-- <label for="passwordRegister">Contraseña:</label> -->
+            <input type="password" class="form-control" id="passwordRegister" aria-describedby="passwordHelp"
+              v-model="passwordSign" placeholder="Contraseña"/>
             <small id="passwordHelp" class="form-text text-muted">Esta debe ser mayor o igual a 6 digitos</small>
           </div>
           <div class="form-group">
-            <label for="passwordRepeat">Repetir Contraseña:</label>
-            <input type="password" class="form-control" id="passwordRepeat" v-model="passwordCompare" />
+            <!-- <label for="passwordRepeat">Repetir Contraseña:</label> -->
+            <input type="password" class="form-control" id="passwordRepeat" v-model="passwordCompare" placeholder="Repetir contraseña"/>
           </div>
           <br>
           <button type="submit" class="btn btn-outline-success">
@@ -81,7 +86,11 @@ export default class Registro extends Vue {
         Swal.fire({
           title: "¡Buen trabajo!",
           text: "Inicio de sesión Exitoso",
-          icon: "success"
+          icon: "success",
+          iconColor: '#3df385',
+          color: " #44dbeb",
+          background: " #1a0b34",
+          confirmButtonColor: " #44dbeb ",
         }).then(result => {
           if (result.isConfirmed) {
             router.push('/lista');
@@ -93,7 +102,11 @@ export default class Registro extends Vue {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Fallo el Inicio de Sesión "
+          text: "Fallo el Inicio de Sesión ",
+          iconColor: ' #e04950 ',
+          color: " #44dbeb",
+          background: " #1a0b34",
+          confirmButtonColor: "#3df385  ",
         });
         console.error(error);
       });
@@ -105,7 +118,11 @@ export default class Registro extends Vue {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Email inválido "
+        text: "Email inválido ",
+        iconColor: ' #e04950 ',
+        color: " #44dbeb",
+        background: " #1a0b34",
+        confirmButtonColor: "#3df385  ",
       });
       return;
     }
@@ -118,7 +135,11 @@ export default class Registro extends Vue {
           Swal.fire({
             title: "¡Buen trabajo!",
             text: "!Registro Exitoso!",
-            icon: "success"
+            icon: "success",
+            iconColor: '#3df385',
+            color: " #44dbeb",
+            background: " #1a0b34",
+            confirmButtonColor: " #44dbeb ",
           });
           this.passwordSign = "";
           this.passwordCompare = "";
@@ -129,7 +150,11 @@ export default class Registro extends Vue {
             icon: "error",
             title: "Oops...",
             text: "A fallado el registro",
-            footer: 'Intente de nuevo'
+            footer: 'Intente de nuevo',
+            iconColor: ' #e04950 ',
+            color: " #44dbeb",
+            background: " #1a0b34",
+            confirmButtonColor: "#3df385  ",
           });
           console.error(error);
         });
@@ -138,7 +163,10 @@ export default class Registro extends Vue {
         icon: "error",
         title: "Oops...",
         text: "No coinciden las contraseñas",
-        // footer: '<a href="#">Why do I have this issue?</a>'
+        iconColor: ' #e04950 ',
+        color: " #44dbeb",
+        background: " #1a0b34",
+        confirmButtonColor: "#3df385  ",
       });
       this.passwordSign = "";
       this.passwordCompare = "";
@@ -151,7 +179,11 @@ export default class Registro extends Vue {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Email inválido "
+        text: "Email inválido ",
+        iconColor: ' #e04950 ',
+        color: " #44dbeb",
+        background: " #1a0b34",
+        confirmButtonColor: "#3df385  ",
       });
       return;
     }
