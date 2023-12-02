@@ -2,17 +2,20 @@
   <div class="container my-4">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        
+
         <img src="../assets/lista2.png" alt="..." class="img-thumbnail">
-        <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action="" class="mt-4 login-form  card  border-primary">
+        <form v-if="mostrarFormulario === 'login'" @submit.prevent="login" action=""
+          class="mt-4 login-form  card  border-primary">
           <h1>Iniciar Sesión</h1>
+          <br>
           <div class="form-group">
-            <label for="emailLogin" class="form-label mt-4">Email:</label>
-            <input type="email" class="form-control" id="emailLogin" v-model="email" />
+            <!-- <label for="emailLogin" class="form-label mt-4">Email:</label> -->
+            <input type="email" class="form-control" id="emailLogin" v-model="email" placeholder="Email"/>
           </div>
+          <br>
           <div class="form-group">
-            <label for="passwordLogin" class="form-label mt-4">Contraseña:</label>
-            <input type="password" class="form-control" id="passwordLogin" v-model="password" />
+            <!-- <label for="passwordLogin" class="form-label mt-4">Contraseña:</label> -->
+            <input type="password" class="form-control" id="passwordLogin" v-model="password" placeholder="Contraseña" />
           </div>
           <br>
           <button type="submit" class="btn btn-outline-primary">
@@ -22,47 +25,33 @@
             Aquí te puedes
             <a href="#" @click="cambiarFormulario('registro')">Regístrar</a>
           </p>
-          <!-- <p class="mt-2">
-            <a href="#" @click="cambiarFormulario('recuperar')">¿Olvidaste tu contraseña?</a>
-          </p> -->
         </form>
 
         <form v-else-if="mostrarFormulario === 'registro'" @submit.prevent="register"
           class="mt-4 register-form  card  border-primary">
           <h2 class="form-title">Registrarse</h2>
+
           <div class="form-group">
-            <label for="emailRegister">Email:</label>
-            <input type="email" class="form-control" id="emailRegister" v-model="emailSign" />
-          </div>
-          <div class="form-group">
-            <label for="passwordRegister">Contraseña:</label>
-            <input type="password" class="form-control" id="passwordRegister" v-model="passwordSign" />
-          </div>
-          <div class="form-group">
-            <label for="passwordRepeat">Repetir Contraseña:</label>
-            <input type="password" class="form-control" id="passwordRepeat" v-model="passwordCompare" />
+            <!-- <label for="emailRegister" class="form-label mt-4">Email address</label> -->
+            <input type="email" class="form-control" id="emailRegister" v-model="emailSign" placeholder="Email">
           </div>
           <br>
-          <button type="submit" class="btn btn-outline-success" >
+          <div class="form-group">
+            <!-- <label for="passwordRegister">Contraseña:</label> -->
+            <input type="password" class="form-control" id="passwordRegister" aria-describedby="passwordHelp"
+              v-model="passwordSign" placeholder="Contraseña"/>
+            <small id="passwordHelp" class="form-text text-muted">Esta debe ser mayor o igual a 6 digitos</small>
+          </div>
+          <div class="form-group">
+            <!-- <label for="passwordRepeat">Repetir Contraseña:</label> -->
+            <input type="password" class="form-control" id="passwordRepeat" v-model="passwordCompare" placeholder="Repetir contraseña"/>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-outline-success">
             Registrarse
           </button>
           <p class="mt-2">
             ¿Ya tienes una cuenta?
-            <a href="#" @click="cambiarFormulario('login')">Iniciar Sesión</a>
-          </p>
-        </form>
-
-        <form v-else @submit.prevent="forgotPassword" class="mt-4 recovery-form">
-          <h2 class="form-title">¿Olvidaste tu Contraseña?</h2>
-          <div class="form-group">
-            <label for="emailForgot">Correo Electrónico:</label>
-            <input type="email" class="form-control" id="emailForgot" v-model="emailForgot" />
-          </div>
-          <button type="submit" class="btn btn-info mt-4 custom-btn">
-            Enviar Correo de Recuperación
-          </button>
-          <p class="mt-2">
-            ¿Recuerdas tu contraseña?
             <a href="#" @click="cambiarFormulario('login')">Iniciar Sesión</a>
           </p>
         </form>
@@ -75,9 +64,10 @@
 import { Component, Vue } from "vue-property-decorator";
 import { auth } from "../../firebaseconfig";
 import {
-  createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail,
+  createUserWithEmailAndPassword, signInWithEmailAndPassword,
 } from "firebase/auth";
 import Swal from 'sweetalert2';
+import router from "../router/index";
 @Component
 export default class Registro extends Vue {
   mostrarFormulario: string = "login";
@@ -94,18 +84,30 @@ export default class Registro extends Vue {
         const user = credenciales.user;
         console.log(user);
         Swal.fire({
-            title: "¡Buen trabajo!",
-            text: "Inicio de sesión Exitoso",
-            icon: "success"
-          });
-        // this.$router.push(/home);
+          title: "¡Buen trabajo!",
+          text: "Inicio de sesión Exitoso",
+          icon: "success",
+          iconColor: '#3df385',
+          color: " #44dbeb",
+          background: " #1a0b34",
+          confirmButtonColor: " #44dbeb ",
+        }).then(result => {
+          if (result.isConfirmed) {
+            router.push('/lista');
+          }
+        });
+
       })
       .catch((error) => {
         Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Fallo el Inicio de Sesión "
-          });
+          icon: "error",
+          title: "Oops...",
+          text: "Fallo el Inicio de Sesión ",
+          iconColor: ' #e04950 ',
+          color: " #44dbeb",
+          background: " #1a0b34",
+          confirmButtonColor: "#3df385  ",
+        });
         console.error(error);
       });
   }
@@ -114,10 +116,14 @@ export default class Registro extends Vue {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.emailSign)) {
       Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Email inválido "
-          });
+        icon: "error",
+        title: "Oops...",
+        text: "Email inválido ",
+        iconColor: ' #e04950 ',
+        color: " #44dbeb",
+        background: " #1a0b34",
+        confirmButtonColor: "#3df385  ",
+      });
       return;
     }
 
@@ -129,17 +135,26 @@ export default class Registro extends Vue {
           Swal.fire({
             title: "¡Buen trabajo!",
             text: "!Registro Exitoso!",
-            icon: "success"
+            icon: "success",
+            iconColor: '#3df385',
+            color: " #44dbeb",
+            background: " #1a0b34",
+            confirmButtonColor: " #44dbeb ",
           });
           this.passwordSign = "";
           this.passwordCompare = "";
+          this.cambiarFormulario('login');
         })
         .catch((error) => {
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "A fallado el registro",
-            footer: 'Intente de nuevo'
+            footer: 'Intente de nuevo',
+            iconColor: ' #e04950 ',
+            color: " #44dbeb",
+            background: " #1a0b34",
+            confirmButtonColor: "#3df385  ",
           });
           console.error(error);
         });
@@ -148,7 +163,10 @@ export default class Registro extends Vue {
         icon: "error",
         title: "Oops...",
         text: "No coinciden las contraseñas",
-        // footer: '<a href="#">Why do I have this issue?</a>'
+        iconColor: ' #e04950 ',
+        color: " #44dbeb",
+        background: " #1a0b34",
+        confirmButtonColor: "#3df385  ",
       });
       this.passwordSign = "";
       this.passwordCompare = "";
@@ -159,31 +177,17 @@ export default class Registro extends Vue {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.emailForgot)) {
       Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Email inválido "
-          });
+        icon: "error",
+        title: "Oops...",
+        text: "Email inválido ",
+        iconColor: ' #e04950 ',
+        color: " #44dbeb",
+        background: " #1a0b34",
+        confirmButtonColor: "#3df385  ",
+      });
       return;
     }
 
-    // sendPasswordResetEmail(auth, this.emailForgot)
-    //   .then(() => {
-    //     Swal.fire({
-    //         title: "Perfecto!",
-    //         text: "Correo de recuperación enviado exitosamente",
-    //         icon: "success"
-    //       });
-    //     this.emailForgot = "";
-    //     this.mostrarFormulario = "login";
-    //   })
-    //   .catch((error) => {
-    //     Swal.fire({
-    //         icon: "error",
-    //         title: "Oops...",
-    //         text: "Error al enviar el correo de recuperación"
-    //       });
-    //     console.error(error);
-    //   });
   }
 
   cambiarFormulario(formulario: string) {

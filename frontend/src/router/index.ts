@@ -6,7 +6,6 @@ import { auth } from '../../firebaseconfig'
 import Lista from "../views/listaCrud.vue";
 import { getAuth } from 'firebase/auth';
 
-
 Vue.use(VueRouter);
 
 
@@ -34,6 +33,7 @@ const routes: Array<RouteConfig> = [
     name: 'lista',
     meta: { requireAuth: true },
     component: Lista
+    
   }
 ]
 

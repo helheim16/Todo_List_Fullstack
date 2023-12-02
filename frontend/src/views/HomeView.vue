@@ -14,5 +14,5 @@ import Login from '../components/logRes.vue'; // @ is an alias to /src
     Login,
   },
 })
-export default class HomeView extends Vue {}
+export default class Registro extends Vue {}
 </script>
