@@ -132,7 +132,7 @@ interface Tarea {
     LogOut,
     ListaTareasComponent,
   }
-}
+})
 
 export default class Crud extends Vue {
   mostrarFormulario: boolean= false;
