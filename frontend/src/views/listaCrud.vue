@@ -91,6 +91,7 @@
                   </div>
                   <button type="submit" class="btn  btn-success">Guardar Cambios</button>
             </div>
+            <ListaTareasComponent  />
           </div>
         </div>
       </div>
@@ -101,7 +102,8 @@
   
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import LogOut from "../components/btnmefui.vue"
+import LogOut from "../components/btnmefui.vue";
+import ListaTareasComponent from '../components/ListaTareas.vue';
 //   import axios from "axios";
 
 interface Tarea {
@@ -114,6 +116,7 @@ interface Tarea {
 export default{
   components:{
     LogOut,
+    ListaTareasComponent,
   }
 }
 
@@ -133,7 +136,7 @@ export class Hello extends Vue {
     cuerpo: "",
     completado: false,
   };
-  
+
 }
 </script>
 <style scoped>
