@@ -21,19 +21,19 @@
     <br>
     <div class="container my-4">
       <div class="row   justify-content-center">
-        <div class="bg-light  rounded">
+        <div class="bg-primary  rounded">
           <div class="form-group row" >
             <div class="input-group rounded buscando">
               <input type="search" class="form-control me-sm-2" placeholder="Search" aria-label="Search"
                 aria-describedby="search-addon" />
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-  
-            </div>
-
-            <br>
-            <br>
-            <div  class="d-grid gap-2">
-              <button type="button" class="btn btn-outline-primary" @click="cambiarFormulario()">{{mostrarFormulario ? "Ocultar" : "Crear"}}</button>
+                <button class="btn btn-info my-2 my-sm-0" type="submit">Buscar</button>
+                <button type="button" class="ms-2 btn btn-success" @click="cambiarFormulario()">{{mostrarFormulario ? "Ocultar" : "Crear"}}</button>
+                
+              </div>
+              
+              <br>
+              <br>
+              <div  class="d-grid gap-2">
             </div>
             
            
