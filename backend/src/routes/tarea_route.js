@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/tarea_controller');
 
-// Retorna todas las tareas
-router.get('/', controller.obtenerTareas);
+// Retorna todas las tareas. Se deben retornar solo las de los usurios
+// router.get('/', controller.obtenerTareas);
 
 // Retorna la tarea solicitada 
 router.get('/:id', controller.obtenerTareas);
