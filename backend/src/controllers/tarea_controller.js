@@ -2,8 +2,9 @@ const Tarea = require('../models/tarea_model');
 
 const tareaController = {
     obtenerTareas: async (req, res) => {
+        const idUsuario = req.params.id;
         try {
-            const tareas = await Tarea.find();
+            const tareas = await Tarea.find({user: idUsuario});
             res.status(200);
             res.json(tareas);
         } catch (error) {
