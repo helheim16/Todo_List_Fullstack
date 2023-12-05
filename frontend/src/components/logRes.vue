@@ -56,7 +56,7 @@
           </p>
         </form>
       </div>
-      <Footer />
+      <Footer/>
     </div>
    
   </div>

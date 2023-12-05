@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">usuario@usuario.com</a>
+              <a class="nav-link text-white" href="#">{{correoAutenticado}}</a>
             </li>
           </ul>
           <form class="">
@@ -26,10 +26,10 @@
         <!-- "row justify-content-around" -->
         <div class="row justify-content-between">
 
-          <div class="col-12 col-lg-4  listita">
+          <div class="col-12 col-lg-4 ">
             <br>
             <form class="d-flex ">
-              <button type="button" class="btn btn-success  me-sm-2  boton" @click="cambiarFormulario()">
+              <button type="button" class="btn btn-success  me-sm-2  boton d-none  d-sm d-md-block  d-sm-block d-xl-none" @click="cambiarFormulario()">
                 <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
                   <path fill="#f1f4f9" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32
                      14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0
@@ -48,11 +48,7 @@
                 </svg>
               </button>
             </form>
-            <br>
-            <form v-if="mostrarFormulario" @submit.prevent="newTask()">
-              <fieldset>
-                <!-- Nueva tarea borde celeste -->
-                <div class="card border-light listita addForm">
+            <div class="card border-light listita addForm d-none d-lg-block d-xl-block">
                   <br>
                   <input type="text" class="form-control" id="" placeholder="Titulo" />
                   <br>
@@ -68,6 +64,27 @@
                   <button type="submit" class="btn  btn-success">Crear</button>
                 </div>
                 <br>
+            <br>
+            <form v-if="mostrarFormulario" @submit.prevent="newTask()">
+              <fieldset>
+                <!-- Nueva tarea borde celeste -->
+                <div class="card border-light listita addForm  boton d-none  d-sm d-md-block  d-sm-block d-xl-none">
+                  <br>
+                  <input type="text" class="form-control" id="" placeholder="Titulo" />
+                  <br>
+                  <input type="text" class="form-control" id="" placeholder=" Descripcion" />
+                  <br>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                    <label class="form-check-label" for="flexCheckChecked">
+                      Checked checkbox
+                    </label>
+                  </div>
+                  <br>
+                  <button type="submit" class="btn  btn-success">Crear</button>
+                </div>
+                <br>
+                
               </fieldset>
             </form>
 
@@ -92,6 +109,8 @@ import { Component, Vue } from "vue-property-decorator";
 import LogOut from "../components/btnmefui.vue";
 import ListaTareasComponent from '../components/ListaTareas.vue';
 import Footer from "../components/footer.vue";
+import { getAuth } from 'firebase/auth';
+
 // import axios from "axios";
 
 interface Tarea {
@@ -106,10 +125,12 @@ interface Tarea {
     LogOut,
     ListaTareasComponent,
     Footer,
+
   }
 })
 
 export default class Crud extends Vue {
+  correoAutenticado: String|null|undefined = getAuth().currentUser?.email;
   mostrarFormulario: boolean = false;
   tarea: Tarea[] = [];
   editandoTarea: string | null = null;
@@ -131,6 +152,7 @@ export default class Crud extends Vue {
   cambiarFormulario(): void {
     this.mostrarFormulario = !this.mostrarFormulario;
   }
+
 }
 </script>
 <style scoped>
@@ -140,33 +162,7 @@ export default class Crud extends Vue {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
-} .listita{
-    min-height: 300px;
- }
+} 
 
-details {
-  background: #f2f2f2;
-  width: 30%;
-  padding: 0.90rem;
-  margin: 0.5rem;
-  border-radius: 6px;
-  cursor: pointer;
-}
 
-summary {
-  list-style: none;
-}
-
-summary::before {
-  content: '+';
-  padding-right: 1rem;
-}
-
-i {
-  background: black;
-}
-
-details[open] summary::before {
-  content: '-';
-}
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="list-group listita">
+    <div class="list-group">
         <item-tarea v-for="tarea in tareas" :key="tarea._id" :tarea="tarea" />
     </div>
 </template>
@@ -10,7 +10,7 @@ import Component from "vue-class-component";
 import axios from 'axios';
 import TareaComponent from './Tarea.vue';
 import {Tarea}  from '../utils/Tarea';
-
+import { getAuth } from 'firebase/auth';
 
 @Component({
     components: {
@@ -34,7 +34,8 @@ export default class ListaTareasComponent extends Vue {
     }
 
     async obtenerTareas(): Promise<void> {
-        const usuario: String = 'pepe1234'
+       const usuario: String|undefined = getAuth().currentUser?.uid;
+        console.log(getAuth().currentUser);
         let config = {
             headers: {
                 'Accept': 'application/json',
