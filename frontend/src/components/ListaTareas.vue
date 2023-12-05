@@ -1,5 +1,5 @@
 <template>
-    <div class="list-group">
+    <div class="list-group listita">
         <item-tarea v-for="tarea in tareas" :key="tarea._id" :tarea="tarea" />
     </div>
 </template>
@@ -71,6 +71,8 @@ export default class ListaTareasComponent extends Vue {
 // });
 </script>
 
-<style lang="scss" scoped>
-
+<style  scoped>
+/* // .listita{
+//     min-height: 300px;
+// } */
 </style>

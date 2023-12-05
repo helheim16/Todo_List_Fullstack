@@ -56,19 +56,27 @@
           </p>
         </form>
       </div>
+      <Footer />
     </div>
+   
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { auth } from "../../firebaseconfig";
+import Footer from "../components/footer.vue";
 import {
   createUserWithEmailAndPassword, signInWithEmailAndPassword,
 } from "firebase/auth";
 import Swal from 'sweetalert2';
 import router from "../router/index";
-@Component
+
+@Component({
+  components: {
+    Footer,
+  }
+})
 export default class Registro extends Vue {
   mostrarFormulario: string = "login";
   email: string = "";

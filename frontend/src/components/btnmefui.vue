@@ -27,7 +27,11 @@ export default class LogOut extends Vue {
                     no-repeat`
             }).then(result => {
                 if (result.isConfirmed) {
-                    router.push('/');
+                    try {
+                        router.push('/');
+                    } catch (error) {
+                        console.error;
+                    }
                 }
             });
             // alert('Cerraste sesion')

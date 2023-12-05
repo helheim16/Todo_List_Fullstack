@@ -24,6 +24,6 @@ export default class TareaComponent extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>
