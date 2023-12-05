@@ -3,6 +3,12 @@ const Tarea = require('../models/tarea_model');
 const tareaController = {
     obtenerTareas: async (req, res) => {
         const idUsuario = req.params.id;
+
+        if (!idUsuario) {
+            res.status(500);
+            res.send(`Se requiere un usuario`);
+        }
+
         try {
             const tareas = await Tarea.find({user: idUsuario});
             res.status(200);
@@ -17,9 +23,9 @@ const tareaController = {
     crearTarea: async (req, res) => {
         // console.log(req.body)
         const { title, desc, completed, important, user } = req.body;
-        const nuevaTarea = new Tarea({ title, desc, completed, important, user });
-
+        
         try {
+            const nuevaTarea = new Tarea({ title, desc, completed, important, user });
             await nuevaTarea.save();
             res.status(201);
             res.json(nuevaTarea);

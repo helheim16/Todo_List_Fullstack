@@ -76,6 +76,7 @@
           <div class="col-12  col-lg-8 card border-primary  ">
             <h1>Lista de tareas</h1>
             <!-- Lista de Tareas  -->
+            <CrearTareaComponent />
             <ListaTareasComponent />
           </div>
 
@@ -92,6 +93,7 @@ import { Component, Vue } from "vue-property-decorator";
 import LogOut from "../components/btnmefui.vue";
 import ListaTareasComponent from '../components/ListaTareas.vue';
 import Footer from "../components/footer.vue";
+import CrearTareaComponent from "@/components/CrearTarea.vue";
 // import axios from "axios";
 
 interface Tarea {
@@ -106,6 +108,7 @@ interface Tarea {
     LogOut,
     ListaTareasComponent,
     Footer,
+    CrearTareaComponent,
   }
 })
 
