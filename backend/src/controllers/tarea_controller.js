@@ -20,7 +20,6 @@ const tareaController = {
         const nuevaTarea = new Tarea({ title, desc, completed, important, user });
 
         try {
-            // Guarda la tarea en mongoDB
             await nuevaTarea.save();
             res.status(201);
             res.json(nuevaTarea);
