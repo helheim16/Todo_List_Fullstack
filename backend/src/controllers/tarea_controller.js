@@ -4,11 +4,6 @@ const tareaController = {
     obtenerTareas: async (req, res) => {
         const idUsuario = req.params.id;
 
-        if (!idUsuario) {
-            res.status(500);
-            res.send(`Se requiere un usuario`);
-        }
-
         try {
             const tareas = await Tarea.find({user: idUsuario});
             res.status(200);
@@ -25,7 +20,13 @@ const tareaController = {
         const { title, desc, completed, important, user } = req.body;
         
         try {
+            // Si los campos son strings vacios, dispara error.
+            if (title === '' || desc === '' || user === '') {
+                throw new Error('Campos vacios');
+            }
+            // No es necesario comprobar undefined porque dispara error mongodb
             const nuevaTarea = new Tarea({ title, desc, completed, important, user });
+
             await nuevaTarea.save();
             res.status(201);
             res.json(nuevaTarea);
@@ -42,6 +43,7 @@ const tareaController = {
 
         try {
             const result = await Tarea.updateOne({ _id: id }, { $set: { title, desc, completed, important, user } });
+            
             if (result.matchedCount === 1) {
                 res.status(200);
                 res.send(`Tarea ${id} editada correctamente`);

@@ -70,7 +70,7 @@ import { Component, Prop } from 'vue-property-decorator';
 import axios from 'axios';
 import { TareaDatosForm } from '../utils/Tarea';
 import { getAuth } from 'firebase/auth';
-
+import { bus } from '@/main';
 
 @Component({
 })
@@ -107,13 +107,23 @@ export default class CrearTareaComponent extends Vue {
                 this.datosForm.desc = '';
                 this.datosForm.completed = false;
                 this.datosForm.important = false;
-                alert(res.status)
+
+                switch (res.status) {
+                    case 201:
+                        bus.$emit('actualizarLista', '')
+                        break;
+                    case 500:
+                        // msg error al crear
+                        alert('Error al crear tarea')
+                        break;
+                    default:
+                        break;
+                }
             })
             .catch(error => {
                 console.error(`Error en request ${error}`);
             });
     }
-
 }
 </script>
 

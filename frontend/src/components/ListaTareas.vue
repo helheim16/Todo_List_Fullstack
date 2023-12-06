@@ -11,6 +11,7 @@ import axios from 'axios';
 import TareaComponent from './Tarea.vue';
 import {Tarea}  from '../utils/Tarea';
 import { getAuth } from 'firebase/auth';
+import { bus } from '@/main';
 
 @Component({
     components: {
@@ -54,26 +55,10 @@ export default class ListaTareasComponent extends Vue {
     // Ciclo de vida de componentes
     mounted() {
         this.listarTareas();
+        bus.$on('actualizarLista', this.listarTareas);
     }  
 }
-
-// export default Vue.extend({
-//     props: [
-//         {}
-//     ],
-//     components: {
-//         'item-tarea': TareaComponent
-//     },
-//     data() {
-//         return {
-            
-//         }
-//     }
-// });
 </script>
 
-<style  scoped>
-/* // .listita{
-//     min-height: 300px;
-// } */
+<style scoped>
 </style>

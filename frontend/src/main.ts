@@ -5,6 +5,9 @@ import "bootswatch/dist/vapor/bootstrap.min.css";
 
 Vue.config.productionTip = false
 
+// Event Bus
+export const bus = new Vue();
+
 new Vue({
   router,
   render: h => h(App)
