@@ -29,7 +29,7 @@
                                  385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z" />
                     </svg>
                 </a>
-                <a id="editar" class="col" href="#">
+                <a id="editar" class="col" href="#" @click="editarTarea">
                     <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512">
                         <path fill="#3df385"
                             d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9
@@ -103,7 +103,7 @@ export default class TareaComponent extends Vue {
                 'Access-Control-Allow-Origin': '*'
             }
         }
-        await axios.put(`http://127.0.0.1:3000/tarea/${this.tarea._id}`, {important: !this.tarea.important}, config)
+        await axios.put(`http://127.0.0.1:3000/tarea/${this.tarea._id}`, { important: !this.tarea.important }, config)
             .then(res => {
                 switch (res.status) {
                     case 200:
@@ -127,7 +127,7 @@ export default class TareaComponent extends Vue {
                 'Access-Control-Allow-Origin': '*'
             }
         }
-        await axios.put(`http://127.0.0.1:3000/tarea/${this.tarea._id}`, {completed: this.tarea.completed}, config)
+        await axios.put(`http://127.0.0.1:3000/tarea/${this.tarea._id}`, { completed: this.tarea.completed }, config)
             .then(res => {
                 switch (res.status) {
                     case 200:
@@ -142,6 +142,21 @@ export default class TareaComponent extends Vue {
             .catch(error => {
                 console.error(`Error en request ${error}`);
             });
+    }
+
+    async editarTarea(): Promise<void> {
+        const { value: text } = await Swal.fire({
+            input: "textarea",
+            inputLabel: "Message",
+            inputPlaceholder: "Type your message here...",
+            inputAttributes: {
+                "aria-label": "Type your message here"
+            },
+            showCancelButton: true
+        });
+        if (text) {
+            Swal.fire(text);
+        }
     }
 }
 </script>
