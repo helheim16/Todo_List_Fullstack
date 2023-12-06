@@ -67,9 +67,10 @@
             </div>
         </div>
 
-        <button v-if="editar" type="submit" class="btn btn-primary" @click="editarTarea">Guardara</button>
-        <button v-else type="submit" class="btn btn-primary" @click="guardarTarea">Guardar</button>
-        <button v-if="editar" type="submit" class="btn btn-primary" @click="cancelar">Cancelar</button>
+        <button v-if="editar" type="submit" class="btn  btn-outline-primary col-4  mx-2"
+            @click="editarTarea">Guardar</button>
+        <button v-else type="submit" class="btn btn-primary col-6" @click="guardarTarea">Guardar</button>
+        <button v-if="editar" type="submit" class="btn  btn-outline-danger col-4  mx-2" @click="cancelar">Cancelar</button>
     </div>
 </template>
 
@@ -128,7 +129,7 @@ export default class CrearTareaComponent extends Vue {
                 text: "Hay campos vacios",
                 iconColor: ' #e04950 ',
                 color: " #44dbeb",
-                background: " #6843c3",
+                background: " #381a76 ",
                 confirmButtonColor: "#3df385  ",
             });
             return;
@@ -177,7 +178,7 @@ export default class CrearTareaComponent extends Vue {
                             text: "Imposible Crear",
                             iconColor: ' #e04950 ',
                             color: " #44dbeb",
-                            background: " #6843c3",
+                            background: " #381a76 ",
                             confirmButtonColor: "#3df385  ",
                         });
                         // msg error al crear
@@ -225,8 +226,8 @@ export default class CrearTareaComponent extends Vue {
                         Toast.fire({
                             icon: "success",
                             iconColor: '#3df385',
-                            color: " #44dbeb",
-                            background: "#6843c3",
+                            color: " #6c43c3 ",
+                            background: " #1ba2f4 ",
                             title: "¡Buen trabajo!",
                             text: "Se ha editado correctamente",
                         });
@@ -239,7 +240,7 @@ export default class CrearTareaComponent extends Vue {
                             text: "Imposible editar",
                             iconColor: ' #e04950 ',
                             color: " #44dbeb",
-                            background: " #6843c3",
+                            background: "#381a76 ",
                             confirmButtonColor: "#3df385  ",
                         });
                         // msg error al crear
