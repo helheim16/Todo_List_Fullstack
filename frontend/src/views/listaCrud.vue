@@ -13,7 +13,7 @@
               <a class="nav-link text-white" href="#">{{correoAutenticado}}</a>
             </li>
           </ul>
-          <form class="">
+          <form class="d-flex">
             <!-- Btn cerrar sesion -->
             <LogOut />
           </form>
@@ -33,7 +33,7 @@
                 {{ mostrarFormulario ?
                   "Ocultar" : "Crear" }}
               </button>
-              <input type="search" class="form-control  my-2 me-sm-2" placeholder="Search" aria-label="Search"
+              <input type="search" class="form-control  my-2 me-sm-2" placeholder="Buscar" aria-label="Search"
                 aria-describedby="search-addon" />
               <button class="btn btn-outline-light my-3 my-sm-2" type="submit">
                 <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
@@ -44,48 +44,12 @@
               </button>
             </form>
               <CrearTareaComponent :alternative=true />
-            <!-- <div class="card border-light listita addForm d-none d-lg-block d-xl-block">
-                  <br>
-                  <input type="text" class="form-control" id="" placeholder="Titulo" />
-                  <br>
-                  <input type="text" class="form-control" id="" placeholder=" Descripcion" />
-                  <br>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                    <label class="form-check-label" for="flexCheckChecked">
-                      Checked checkbox
-                    </label>
-                  </div>
-                  <br>
-                  <button type="submit" class="btn  btn-success">Crear</button>
-                </div>
-                <br>
-            <br> -->
             <form v-if="mostrarFormulario" @submit.prevent="newTask()">
-              <!-- <fieldset>
-                Nueva tarea borde celeste
-                <div class="card border-light listita addForm  boton d-none  d-sm d-md-block  d-sm-block d-xl-none">
-                  <br>
-                  <input type="text" class="form-control" id="" placeholder="Titulo" />
-                  <br>
-                  <input type="text" class="form-control" id="" placeholder=" Descripcion" />
-                  <br>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                    <label class="form-check-label" for="flexCheckChecked">
-                      Checked checkbox
-                    </label>
-                  </div>
-                  <br>
-                  <button type="submit" class="btn  btn-success">Crear</button>
-                </div>
-                
-              </fieldset> -->
               <CrearTareaComponent :alternative=false />
             </form>
 
           </div>
-          <!-- col-12 col-md-6 col-lg  -->
+          
           <div class="col-12  col-lg-8 card border-primary  ">
             <h1>Lista de tareas</h1>
             <!-- Lista de Tareas  -->

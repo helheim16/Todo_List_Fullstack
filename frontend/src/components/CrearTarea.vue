@@ -97,9 +97,38 @@ export default class CrearTareaComponent extends Vue {
         important: false,
     }
 
-    async guardarTarea(): Promise<void> {
-        const usuario: String | undefined = getAuth().currentUser?.uid;
 
+    // Define metodos
+    guardarTarea(): void {
+        this.postTarea()
+    }
+    verificar(): boolean {
+        if (!this.datosForm.title.trim() || !this.datosForm.desc.trim()) {
+            return (false);
+            
+        } else {
+            return (true);
+        }
+    }
+
+
+
+
+
+    async postTarea(): Promise<void> {
+        const usuario: String | undefined = getAuth().currentUser?.uid;
+        if(!this.verificar()){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Hay campos vacios",
+                iconColor: ' #e04950 ',
+                color: " #44dbeb",
+                background: " #6843c3",
+                confirmButtonColor: "#3df385  ",
+            });
+            return;
+        }
         let config = {
             headers: {
                 'Accept': 'application/json',
@@ -118,7 +147,7 @@ export default class CrearTareaComponent extends Vue {
                     case 201:
                         const Toast = Swal.mixin({
                             toast: true,
-                            position: "center",
+                            position: "bottom-right",
                             showConfirmButton: false,
                             timer: 3000,
                             timerProgressBar: true,
