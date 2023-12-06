@@ -20,9 +20,10 @@ const tareaController = {
         const { title, desc, completed, important, user } = req.body;
         
         try {
-            // Si los campos son strings vacios, dispara error.
+            // Si los campos son strings vacios, retorna mensaje error.
             if (title === '' || desc === '' || user === '') {
-                throw new Error('Campos vacios');
+                res.status(500);
+                res.send(`Fallo al crear tarea`);
             }
             // No es necesario comprobar undefined porque dispara error mongodb
             const nuevaTarea = new Tarea({ title, desc, completed, important, user });

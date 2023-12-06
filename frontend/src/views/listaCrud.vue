@@ -20,7 +20,7 @@
         </div>
       </div>
     </nav>
-    <div class="container">
+    <div class="container vh100">
       <br>
       <div class="row">
         <!-- "row justify-content-around" -->
@@ -126,6 +126,10 @@ export default class Crud extends Vue {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
 } 
+
+.vh100 {
+  min-height: 80vh;
+}
 
 
 </style>
