@@ -31,8 +31,7 @@
         <button type="submit" class="btn btn-primary" @click="guardarTarea">Guardar</button>
     </div>
 
-    <div v-else
-        class="container my-4 card border-light listita addForm  boton d-block d-lg-none d-xl-none">
+    <div v-else class="container my-4 card border-light listita addForm  boton d-block d-lg-none d-xl-none">
         <div class="mb-4">
             <h5>Agregar Tarea</h5>
         </div>
@@ -70,6 +69,7 @@ import { Component, Prop } from 'vue-property-decorator';
 import axios from 'axios';
 import { TareaDatosForm } from '../utils/Tarea';
 import { getAuth } from 'firebase/auth';
+import Swal from 'sweetalert2';
 import { bus } from '../main';
 
 @Component({
@@ -110,11 +110,39 @@ export default class CrearTareaComponent extends Vue {
 
                 switch (res.status) {
                     case 201:
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "center",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: "success",
+                            iconColor: '#3df385',
+                            color: " #44dbeb",
+                            background: "#6843c3",
+                            title: "¡Buen trabajo!",
+                            text: "Se ha creado con exito",
+                        });
                         bus.$emit('actualizarLista', '')
                         break;
                     case 500:
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Imposible Crear",
+                            iconColor: ' #e04950 ',
+                            color: " #44dbeb",
+                            background: " #6843c3",
+                            confirmButtonColor: "#3df385  ",
+                        });
                         // msg error al crear
-                        alert('Error al crear tarea')
+                        // alert('Error al crear tarea')
                         break;
                     default:
                         break;
