@@ -52,6 +52,10 @@ export default class ListaTareasComponent extends Vue {
         });
     }
 
+    async eliminarTarea(): Promise<void> {
+        
+    }
+
     // Ciclo de vida de componentes
     mounted() {
         this.listarTareas();
