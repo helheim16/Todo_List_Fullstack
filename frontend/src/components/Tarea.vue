@@ -63,6 +63,8 @@ import axios from 'axios';
 import { Component, Prop } from 'vue-property-decorator';
 import { Tarea } from '../utils/Tarea';
 import { bus } from '@/main';
+import Swal from 'sweetalert2';
+
 
 @Component({
 
@@ -145,18 +147,29 @@ export default class TareaComponent extends Vue {
     }
 
     async editarTarea(): Promise<void> {
-        const { value: text } = await Swal.fire({
-            input: "textarea",
-            inputLabel: "Message",
-            inputPlaceholder: "Type your message here...",
-            inputAttributes: {
-                "aria-label": "Type your message here"
-            },
-            showCancelButton: true
-        });
-        if (text) {
-            Swal.fire(text);
+        let config = {
+            headers: {
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            }
         }
+        const { value: formValues } = await Swal.fire({
+            title: "Multiple inputs",
+            html: `
+            <input v-model="tarea.title" type="text" class="form-control" id="titulo" placeholder="Ingrese el título">
+            <input v-model="tarea.title" type="text" class="form-control" id="titulo" placeholder="Ingrese el título">`,
+            focusConfirm: false,
+            preConfirm: () => {
+
+            }
+        });
+        if (formValues) {
+            Swal.fire(JSON.stringify(formValues));
+        }
+    }
+
+    async actualizarTarea(input1: String|null, input2: String|null): Promise<void> {
+
     }
 }
 </script>
