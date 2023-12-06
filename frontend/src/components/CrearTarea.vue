@@ -79,6 +79,8 @@ export default class CrearTareaComponent extends Vue {
     // Define propiedades
     @Prop() alternative!: boolean;
 
+    editar: boolean = false;
+
     datosForm: TareaDatosForm = {
         title: '',
         desc: '',
