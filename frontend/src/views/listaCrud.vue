@@ -33,9 +33,9 @@
                 {{ mostrarFormulario ?
                   "Ocultar" : "Crear" }}
               </button>
-              <input type="search" class="form-control  my-2 me-sm-2" placeholder="Buscar" aria-label="Search " v-model="searchQuery"
+              <input type="search" class="form-control  my-2 me-sm-2" placeholder="Buscar" aria-label="Search " v-model="searchQuery" @input="filtrarBusqueda"
                 aria-describedby="search-addon" />
-              <button class="btn btn-outline-light my-3 my-sm-2" type="submit" @click.prevent="search" >
+              <button class="btn btn-outline-light my-3 my-sm-2" type="submit" @click.prevent="filtrarBusqueda" >
                 <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
                   <path fill="#ffffff"
                     d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 
@@ -44,7 +44,7 @@
               </button>
             </form>
               <CrearTareaComponent :alternative=true />
-            <form v-if="mostrarFormulario" @submit.prevent="newTask()">
+            <form v-if="mostrarFormulario" >
               <CrearTareaComponent :alternative=false />
             </form>
 
@@ -73,15 +73,9 @@ import ListaTareasComponent from '../components/ListaTareas.vue';
 import CrearTareaComponent from "../components/CrearTarea.vue";
 import Footer from "../components/footer.vue";
 import { getAuth } from 'firebase/auth';
+import { Tarea } from '../utils/Tarea'
+import { bus } from '../main';
 
-// import axios from "axios";
-
-interface Tarea {
-  _id: string;
-  titulo: string;
-  cuerpo: string;
-  completado: boolean;
-}
 
 @Component({
   components: {
@@ -98,36 +92,14 @@ export default class Crud extends Vue {
   mostrarFormulario: boolean = false;
   tarea: Tarea[] = [];
   editandoTarea: string | null = null;
-  tareaEditada: Tarea = {
-    _id: "",
-    titulo: "",
-    cuerpo: "",
-    completado: false,
-  };
-  nuevaTarea: Tarea = {
-    _id: "",
-    titulo: "",
-    cuerpo: "",
-    completado: false,
+
+  filtrarBusqueda(): void {
+    bus.$emit('actualizarLista', this.searchQuery);
   };
 
-  newTask(): void {
-  };
   cambiarFormulario(): void {
     this.mostrarFormulario = !this.mostrarFormulario;
   };
- 
-  search() {
-    // Filtrar tareas según la búsqueda
-    // Puedes realizar acciones adicionales si es necesario
-    console.log("Realizando búsqueda...");
-
-    // Ejemplo de filtrado (ajusta según tus necesidades)
-    this.tarea = this.tarea.filter((t) =>
-      t.titulo.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
-  };
-  // ... otros métodos
 }
 
 

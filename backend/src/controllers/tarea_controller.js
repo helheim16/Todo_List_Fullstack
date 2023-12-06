@@ -5,7 +5,24 @@ const tareaController = {
         const idUsuario = req.params.id;
 
         try {
-            const tareas = await Tarea.find({user: idUsuario});
+            const tareas = await Tarea.find({ user: idUsuario });
+            res.status(200);
+            res.json(tareas);
+        } catch (error) {
+            console.error(error);
+            res.status(500);
+            res.send(`Fallo al obtener tareas`);
+        }
+    },
+
+    obtenerTareasFiltradas: async (req, res) => {
+        const idUsuario = req.params.id;
+        const filter = req.params.filter;
+        console.log(`id ${idUsuario} === filter ${filter}`)
+
+        try {
+            const tareas = await Tarea.find({user: idUsuario, title: new RegExp(filter, 'i') });
+
             res.status(200);
             res.json(tareas);
         } catch (error) {

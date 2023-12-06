@@ -22,19 +22,17 @@ import { bus } from '../main';
 export default class ListaTareasComponent extends Vue {
 
     // Define propiedades
-    tareas: Tarea[] = [
-
-    ];
-
-    // Define data
-
+    tareas: Tarea[] = [];
 
     // Define metodos
-    async listarTareas(): Promise<void> {
-        this.obtenerTareas()
-    }
+    // async listarTareas(filter?: String): Promise<void> {
+    //     if (!filter) {
+    //         this.obtenerTareas(filter);
+    //     } else {
+    //     }
+    // }
 
-    async obtenerTareas(): Promise<void> {
+    async obtenerTareas(filter?: String): Promise<void> {
        const usuario: String|undefined = getAuth().currentUser?.uid;
        
         let config = {
@@ -43,7 +41,8 @@ export default class ListaTareasComponent extends Vue {
                 'Access-Control-Allow-Origin': '*'
             }
         }
-        await axios.get(`http://127.0.0.1:3000/tarea/${usuario}`, config)
+
+        await axios.get(`http://127.0.0.1:3000/tarea/${usuario}${filter ? '/'+filter : ''}`, config)
         .then(res => {
             this.tareas = res.data
         })
@@ -54,8 +53,8 @@ export default class ListaTareasComponent extends Vue {
 
     // Ciclo de vida de componentes
     mounted() {
-        this.listarTareas();
-        bus.$on('actualizarLista', this.listarTareas);
+        this.obtenerTareas();
+        bus.$on('actualizarLista', this.obtenerTareas);
     }  
 }
 </script>

@@ -139,7 +139,7 @@ export default class TareaComponent extends Vue {
             .then(res => {
                 switch (res.status) {
                     case 200:
-                        bus.$emit('actualizarLista', '')
+                        bus.$emit('actualizarLista', )
                         break;
                     case 500:
                         break;
@@ -163,7 +163,7 @@ export default class TareaComponent extends Vue {
             .then(res => {
                 switch (res.status) {
                     case 200:
-                        bus.$emit('actualizarLista', '')
+                        bus.$emit('actualizarLista', )
                         break;
                     case 500:
                         break;

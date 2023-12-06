@@ -5,8 +5,11 @@ const controller = require('../controllers/tarea_controller');
 // Retorna todas las tareas. Utilizado durante el desarrollo
 // router.get('/', controller.obtenerTareas);
 
-// Retorna la tarea solicitada 
+// Retorna las tareas del usuario dado 
 router.get('/:id', controller.obtenerTareas);
+
+// Retorna las tareas del usuario dado con coincidencias
+router.get('/:id/:filter', controller.obtenerTareasFiltradas);
 
 // Crea una nueva tarea
 router.post('/', controller.crearTarea);
