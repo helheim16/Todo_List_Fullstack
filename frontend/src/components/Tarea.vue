@@ -29,7 +29,7 @@
                                  385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z" />
                     </svg>
                 </a>
-                <a id="editar" class="col" href="#" @click="editarTarea">
+                <a id="editar" class="col" href="#" @click="actualizarTarea">
                     <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512">
                         <path fill="#3df385"
                             d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9
@@ -174,29 +174,8 @@ export default class TareaComponent extends Vue {
             });
     }
 
-    async editarTarea(): Promise<void> {
-        let config = {
-            headers: {
-                'Accept': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            }
-        }
-        const { value: formValues } = await Swal.fire({
-            title: "Multiple inputs",
-            html: `
-            <input v-model="tarea.title" type="text" class="form-control" id="titulo" placeholder="Ingrese el título">
-            <input v-model="tarea.title" type="text" class="form-control" id="titulo" placeholder="Ingrese el título">`,
-            focusConfirm: false,
-            preConfirm: () => {
-
-            }
-        });
-        if (formValues) {
-            Swal.fire(JSON.stringify(formValues));
-        }
-    }
-
-    async actualizarTarea(input1: String|null, input2: String|null): Promise<void> {
+    async actualizarTarea(): Promise<void> {
+        bus.$emit('editarTarea', {...this.tarea})
 
     }
 }

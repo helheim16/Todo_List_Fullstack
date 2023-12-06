@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex row">
-        <a type="button" class="btn btn-outline-light col-12" @click="logOut">Cerrar Sesion</a>
+        <a type="button" class="btn btn-outline-light col-12 me-sm-2 my-2 my-sm-0" @click="logOut">Cerrar Sesion</a>
     </div>
 </template>
 

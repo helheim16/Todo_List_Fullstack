@@ -206,10 +206,10 @@ export default class CrearTareaComponent extends Vue {
                 this.datosForm.important = false;
 
                 switch (res.status) {
-                    case 201:
+                    case 200:
                         const Toast = Swal.mixin({
                             toast: true,
-                            position: "center",
+                            position: "bottom-right",
                             showConfirmButton: false,
                             timer: 3000,
                             timerProgressBar: true,
@@ -260,10 +260,10 @@ export default class CrearTareaComponent extends Vue {
             this.editar = true;
             this.tarea = tarea;
             this.datosForm = {
-                title: tarea.title,
-                desc: tarea.desc,
-                completed: tarea.completed,
-                important: tarea.important,
+                title: this.tarea.title,
+                desc: this.tarea.desc,
+                completed: this.tarea.completed,
+                important: this.tarea.important,
             };
             console.log(this.datosForm)
         });
@@ -276,7 +276,8 @@ export default class CrearTareaComponent extends Vue {
                 completed: false,
                 important: false,
             };
-        });
+        });
+
     }
 }
 </script>
