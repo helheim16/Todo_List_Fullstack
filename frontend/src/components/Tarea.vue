@@ -73,6 +73,8 @@ import { Tarea } from '../utils/Tarea';
 
 export default class TareaComponent extends Vue {
     @Prop() tarea!: Tarea;
+
+    
 }
 </script>
 
