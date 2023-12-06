@@ -13,7 +13,7 @@
               <a class="nav-link text-white" href="#">{{correoAutenticado}}</a>
             </li>
           </ul>
-          <form class="d-flex">
+          <form class="row d-flex">
             <!-- Btn cerrar sesion -->
             <LogOut />
           </form>

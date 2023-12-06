@@ -62,7 +62,8 @@ import Vue from 'vue';
 import axios from 'axios';
 import { Component, Prop } from 'vue-property-decorator';
 import { Tarea } from '../utils/Tarea';
-import { bus } from '@/main';
+import Swal from 'sweetalert2';
+import { bus } from '../main';
 
 @Component({
 
@@ -83,9 +84,37 @@ export default class TareaComponent extends Vue {
             .then(res => {
                 switch (res.status) {
                     case 200:
+                    const Toast = Swal.mixin({
+                            toast: true,
+                            position: "bottom-right",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: "success",
+                            iconColor: '#3df385',
+                            color: "  #240a37  ",
+                            background: " #e35963 ",
+                            title: "¡Buen trabajo!",
+                            text: "Se ha eliminado con exito",
+                        });
                         bus.$emit('actualizarLista', '')
                         break;
                     case 500:
+                    Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Imposible borar",
+                            iconColor: ' #e04950 ',
+                            color: " #44dbeb",
+                            background: " #6843c3",
+                            confirmButtonColor: "#3df385  ",
+                        });
                         break;
                     default:
                         break;
