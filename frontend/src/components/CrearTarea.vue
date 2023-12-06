@@ -32,7 +32,7 @@
     </div>
 
     <div v-else
-        class="container my-4 card border-light listita addForm  boton d-none  d-sm d-md-block  d-sm-block d-xl-none">
+        class="container my-4 card border-light listita addForm  boton d-block d-lg-none d-xl-none">
         <div class="mb-4">
             <h5>Agregar Tarea</h5>
         </div>
@@ -70,7 +70,7 @@ import { Component, Prop } from 'vue-property-decorator';
 import axios from 'axios';
 import { TareaDatosForm } from '../utils/Tarea';
 import { getAuth } from 'firebase/auth';
-import { bus } from '@/main';
+import { bus } from '../main';
 
 @Component({
 })
