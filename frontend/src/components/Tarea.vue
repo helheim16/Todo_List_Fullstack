@@ -1,8 +1,8 @@
 <template>
-    <a href="#" class="list-group-item list-group-item-action d-flex bd-highlight">
-        <details class="list-group-item d-flex bd-highlight">
+    <a href="#" class="list-group-item list-group-item-action d-flex bd-highlight overflow-hidden">
+        <details class="list-group-item d-flex bd-highlight p-0 overflow-hidden">
 
-            <summary class="row list-group-item d-flex text-start align-items-center justify-content-between">
+            <summary class="row px-0 list-group-item d-flex text-start align-items-center justify-content-between">
                 <div class=" col-lg-3  col-12 flex-d bd-highlight ">
                     <input class="form-check-input me-3" type="checkbox" value="" id="flexCheckChecked"
                         v-model="tarea.completed">
@@ -10,7 +10,7 @@
                     }}</label>
                 </div>
 
-                <div class="col-lg-6 col-12 flex-d bd-highlight">
+                <div class="col-lg-5 col-12 flex-d bd-highlight">
                     <h5 class="form-check">{{ tarea.title }}</h5>
                 </div>
 
