@@ -28,10 +28,14 @@
                 <label class="form-check-label" for="importante">Importante</label>
             </div>
         </div>
+        <div class="row  justify-content-center">
+            <button v-if="editar" type="submit" class="btn  btn-outline-primary col-4  mx-2"
+                @click="editarTarea">Guardar</button>
+            <button v-else type="submit" class="btn btn-primary col-6" @click="guardarTarea">Guardar</button>
+            <button v-if="editar" type="submit" class="btn  btn-outline-danger col-4  mx-2"
+                @click="cancelar">Cancelar</button>
+        </div>
 
-        <button v-if="editar" type="submit" class="btn btn-primary" @click="editarTarea">Guardara</button>
-        <button v-else type="submit" class="btn btn-primary" @click="guardarTarea">Guardar</button>
-        <button v-if="editar" type="submit" class="btn btn-primary" @click="cancelar">Cancelar</button>
     </div>
 
     <div v-else class="container my-4 card border-light listita addForm  boton d-block d-lg-none d-xl-none">
@@ -88,7 +92,7 @@ export default class CrearTareaComponent extends Vue {
 
     editar: boolean = false;
 
-    tarea: Tarea|undefined;
+    tarea: Tarea | undefined;
 
     datosForm: TareaDatosForm = {
         title: '',
@@ -105,7 +109,7 @@ export default class CrearTareaComponent extends Vue {
     verificar(): boolean {
         if (!this.datosForm.title.trim() || !this.datosForm.desc.trim()) {
             return (false);
-            
+
         } else {
             return (true);
         }
@@ -117,7 +121,7 @@ export default class CrearTareaComponent extends Vue {
 
     async postTarea(): Promise<void> {
         const usuario: String | undefined = getAuth().currentUser?.uid;
-        if(!this.verificar()){
+        if (!this.verificar()) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -276,7 +280,7 @@ export default class CrearTareaComponent extends Vue {
                 completed: false,
                 important: false,
             };
-        });
+        });
 
     }
 }
