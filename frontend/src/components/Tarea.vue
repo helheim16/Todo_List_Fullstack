@@ -3,16 +3,17 @@
         <details class="list-group-item d-flex bd-highlight p-0 overflow-hidden">
 
             <summary class="row container list-group-item d-flex text-start align-items-center justify-content-between">
-                <div class=" col-lg-3  col-12 flex-d bd-highlight ">
+                <div class=" col-lg-3  col-6 flex-d bd-highlight ">
                     <input class="form-check-input me-3" type="checkbox" value="" id="flexCheckChecked"
                         v-model="tarea.completed" @change="completarTarea">
                     <label class="form-check-label" for="flexCheckChecked">{{ tarea.completed ? 'Completa' : 'Pendiente'
                     }}</label>
                 </div>
 
-                <div class="col-lg-5 col-12 flex-d bd-highlight">
+                <div class="col-lg-5 col-6 overflow-hidden flex-d bd-highlight">
                     <h5 class="form-check">{{ tarea.title }}</h5>
                 </div>
+           
                 <a id="importante" class="col" href="#" v-if="tarea.important" @click="toggleImportante">
                     <svg xmlns="http://www.w3.org/2000/svg" height="25" width="25" viewBox="0 0 576 512">
                         <path fill="#fcc405" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3
@@ -48,6 +49,7 @@
                             0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
                     </svg>
                 </a>
+                
             </summary>
             <hr>
             <div class="container  form-text">

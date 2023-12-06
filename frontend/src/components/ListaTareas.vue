@@ -11,7 +11,7 @@ import axios from 'axios';
 import TareaComponent from './Tarea.vue';
 import {Tarea}  from '../utils/Tarea';
 import { getAuth } from 'firebase/auth';
-import { bus } from '@/main';
+import { bus } from '../main';
 
 @Component({
     components: {
