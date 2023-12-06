@@ -16,15 +16,15 @@ export default class LogOut extends Vue {
             Swal.fire({
                 title: "Usted  ha cerrado la sesion, Hasta la proxima!!",
                 width: 600,
-                position: "center-end",
+                position: "center",
                 padding: "3em",
                 color: " #44dbeb",
                 background: " #1a0b34",
-                backdrop: `
-                    rgba(0,0,123,0.4)
-                    url("https://i.pinimg.com/originals/f3/0e/21/f30e21da146bd3501555eec943a8898e.gif")
-                    left top
-                    no-repeat`
+                // backdrop: `
+                //     rgba(0,0,123,0.4)
+                //     url("https://usagif.com/wp-content/uploads/gif/outerspace-15.gif")
+                //     center
+                //     no-repeat`
             }).then(result => {
                 if (result.isConfirmed) {
                     try {

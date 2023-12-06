@@ -98,11 +98,13 @@
           </div>
 
         </div>
-        <Footer />
+       
       </div>
 
     </div>
+    <Footer />
   </div>
+
 </template>
   
 <script lang="ts">
@@ -110,7 +112,7 @@ import { Component, Vue } from "vue-property-decorator";
 import LogOut from "../components/btnmefui.vue";
 import ListaTareasComponent from '../components/ListaTareas.vue';
 import Footer from "../components/footer.vue";
-import CrearTareaComponent from "@/components/CrearTarea.vue";
+// import CrearTareaComponent from "../components/CrearTarea.vue";
 import { getAuth } from 'firebase/auth';
 
 // import axios from "axios";
@@ -127,7 +129,7 @@ interface Tarea {
     LogOut,
     ListaTareasComponent,
     Footer,
-    CrearTareaComponent,
+    // CrearTareaComponent,
   }
 })
 
