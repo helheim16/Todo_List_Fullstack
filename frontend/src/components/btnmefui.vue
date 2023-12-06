@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex row">
-        <a type="button" class="btn btn-outline-light col-12 me-sm-2 my-2 my-sm-0" @click="logOut">Cerrar Sesion</a>
+        <a type="button" class="btn-outline-light boton   mx-5 " @click="logOut">Cerrar Sesion</a>
     </div>
 </template>
 
@@ -45,4 +45,14 @@ export default class LogOut extends Vue {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+
+.boton{
+height: 30px;
+width: 150px;
+}
+a{
+    text-decoration: none;
+}
+
+</style>
