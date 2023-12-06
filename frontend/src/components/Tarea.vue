@@ -2,7 +2,7 @@
     <a href="#" class="list-group-item list-group-item-action d-flex bd-highlight overflow-hidden">
         <details class="list-group-item d-flex bd-highlight p-0 overflow-hidden">
 
-            <summary class="row px-0 list-group-item d-flex text-start align-items-center justify-content-between">
+            <summary class="row container list-group-item d-flex text-start align-items-center justify-content-between">
                 <div class=" col-lg-3  col-12 flex-d bd-highlight ">
                     <input class="form-check-input me-3" type="checkbox" value="" id="flexCheckChecked"
                         v-model="tarea.completed">
