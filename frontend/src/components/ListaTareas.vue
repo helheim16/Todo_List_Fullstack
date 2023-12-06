@@ -35,7 +35,7 @@ export default class ListaTareasComponent extends Vue {
 
     async obtenerTareas(): Promise<void> {
        const usuario: String|undefined = getAuth().currentUser?.uid;
-        console.log(getAuth().currentUser);
+       
         let config = {
             headers: {
                 'Accept': 'application/json',

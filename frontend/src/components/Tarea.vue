@@ -46,7 +46,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-// import Component from 'vue-class-component';
 import { Component, Prop } from 'vue-property-decorator';
 import { Tarea } from '../utils/Tarea';
 
@@ -60,9 +59,7 @@ export default class TareaComponent extends Vue {
 
 <style scoped>
 details {
-    /* background: #2c2a2a; */
     width: 100%;
-    /* margin: 0.5rem; */
     border-radius: 6px;
     cursor: pointer;
 }
@@ -71,16 +68,7 @@ summary {
     list-style: none;
 }
 
-/* 
-summary::before {
-    /* content: '+'; */
-/* padding-right: 1rem; */
-
-
 i {
     background: black;
 }
-
-/* details[open] summary::before {
-    /* content: '-'; */
 </style> 

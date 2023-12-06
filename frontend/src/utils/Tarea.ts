@@ -7,3 +7,10 @@ export interface Tarea {
     important: boolean;
     user: string;
 };
+
+export interface TareaDatosForm {
+    title: string;
+    desc: string;
+    completed: boolean;
+    important: boolean;
+}

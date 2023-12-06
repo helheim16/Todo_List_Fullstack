@@ -48,7 +48,8 @@
                 </svg>
               </button>
             </form>
-            <div class="card border-light listita addForm d-none d-lg-block d-xl-block">
+              <CrearTareaComponent :alternative=true />
+            <!-- <div class="card border-light listita addForm d-none d-lg-block d-xl-block">
                   <br>
                   <input type="text" class="form-control" id="" placeholder="Titulo" />
                   <br>
@@ -64,10 +65,10 @@
                   <button type="submit" class="btn  btn-success">Crear</button>
                 </div>
                 <br>
-            <br>
+            <br> -->
             <form v-if="mostrarFormulario" @submit.prevent="newTask()">
-              <fieldset>
-                <!-- Nueva tarea borde celeste -->
+              <!-- <fieldset>
+                Nueva tarea borde celeste
                 <div class="card border-light listita addForm  boton d-none  d-sm d-md-block  d-sm-block d-xl-none">
                   <br>
                   <input type="text" class="form-control" id="" placeholder="Titulo" />
@@ -83,9 +84,9 @@
                   <br>
                   <button type="submit" class="btn  btn-success">Crear</button>
                 </div>
-                <br>
                 
-              </fieldset>
+              </fieldset> -->
+              <CrearTareaComponent :alternative=false />
             </form>
 
           </div>
@@ -93,7 +94,6 @@
           <div class="col-12  col-lg-8 card border-primary  ">
             <h1>Lista de tareas</h1>
             <!-- Lista de Tareas  -->
-            <CrearTareaComponent />
             <ListaTareasComponent />
           </div>
 
