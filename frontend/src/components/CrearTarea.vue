@@ -2,7 +2,8 @@
     <div v-if=alternative class="container my-4 card border-light listita addForm d-none d-lg-block d-xl-block">
         <!-- <div v-if=alternative class="container my-4 card border-light listita addForm boton d-none d-sm d-md-block d-sm-block d-xl-none"> -->
         <div class="mb-4">
-            <h5>Agregar Tarea</h5>
+            <h5 v-if="editar">Editar Tarea</h5>
+            <h5 v-else>Agregar Tarea</h5>
         </div>
 
         <!-- Input Titulo -->
@@ -28,12 +29,15 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" @click="guardarTarea">Guardar</button>
+        <button v-if="editar" type="submit" class="btn btn-primary" @click="editarTarea">Guardara</button>
+        <button v-else type="submit" class="btn btn-primary" @click="guardarTarea">Guardar</button>
+        <button v-if="editar" type="submit" class="btn btn-primary" @click="cancelar">Cancelar</button>
     </div>
 
     <div v-else class="container my-4 card border-light listita addForm  boton d-block d-lg-none d-xl-none">
         <div class="mb-4">
-            <h5>Agregar Tarea</h5>
+            <h5 v-if="editar">Editar Tarea</h5>
+            <h5 v-else>Agregar Tarea</h5>
         </div>
 
         <!-- Input Titulo -->
@@ -59,7 +63,9 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" @click="guardarTarea">Guardar</button>
+        <button v-if="editar" type="submit" class="btn btn-primary" @click="editarTarea">Guardara</button>
+        <button v-else type="submit" class="btn btn-primary" @click="guardarTarea">Guardar</button>
+        <button v-if="editar" type="submit" class="btn btn-primary" @click="cancelar">Cancelar</button>
     </div>
 </template>
 
@@ -67,6 +73,7 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import axios from 'axios';
+import { Tarea } from '../utils/Tarea';
 import { TareaDatosForm } from '../utils/Tarea';
 import { getAuth } from 'firebase/auth';
 import Swal from 'sweetalert2';
@@ -80,6 +87,8 @@ export default class CrearTareaComponent extends Vue {
     @Prop() alternative!: boolean;
 
     editar: boolean = false;
+
+    tarea: Tarea|undefined;
 
     datosForm: TareaDatosForm = {
         title: '',
@@ -177,6 +186,97 @@ export default class CrearTareaComponent extends Vue {
             .catch(error => {
                 console.error(`Error en request ${error}`);
             });
+    }
+
+    async editarTarea(): Promise<void> {
+        const usuario: String | undefined = getAuth().currentUser?.uid;
+
+        let config = {
+            headers: {
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            }
+        }
+
+        await axios.put(`http://127.0.0.1:3000/tarea/${this.tarea?._id}`, { ...this.datosForm, user: usuario }, config)
+            .then(res => {
+                this.datosForm.title = '';
+                this.datosForm.desc = '';
+                this.datosForm.completed = false;
+                this.datosForm.important = false;
+
+                switch (res.status) {
+                    case 201:
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "center",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: "success",
+                            iconColor: '#3df385',
+                            color: " #44dbeb",
+                            background: "#6843c3",
+                            title: "¡Buen trabajo!",
+                            text: "Se ha editado correctamente",
+                        });
+                        bus.$emit('actualizarLista', '')
+                        break;
+                    case 500:
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Imposible editar",
+                            iconColor: ' #e04950 ',
+                            color: " #44dbeb",
+                            background: " #6843c3",
+                            confirmButtonColor: "#3df385  ",
+                        });
+                        // msg error al crear
+                        // alert('Error al crear tarea')
+                        break;
+                    default:
+                        break;
+                }
+            })
+            .catch(error => {
+                console.error(`Error en request ${error}`);
+            });
+    }
+
+    cancelar(): void {
+        bus.$emit('actualizarLista', '');
+    }
+
+    // Ciclo de vida de componentes
+    mounted() {
+        bus.$on('editarTarea', (tarea: Tarea) => {
+            this.editar = true;
+            this.tarea = tarea;
+            this.datosForm = {
+                title: tarea.title,
+                desc: tarea.desc,
+                completed: tarea.completed,
+                important: tarea.important,
+            };
+            console.log(this.datosForm)
+        });
+        bus.$on('actualizarLista', () => {
+            this.editar = false;
+            this.tarea = undefined;
+            this.datosForm = {
+                title: '',
+                desc: '',
+                completed: false,
+                important: false,
+            };
+        });
     }
 }
 </script>
