@@ -29,10 +29,7 @@
           <div class="col-12 col-lg-4 ">
             <br>
             <form class="d-flex ">
-              <button type="button" class="btn btn-success  me-sm-2  boton d-block d-lg-none" @click="cambiarFormulario()">
-                {{ mostrarFormulario ?
-                  "Ocultar" : "Crear" }}
-              </button>
+             
               <input type="search" class="form-control  my-2 me-sm-2" placeholder="Buscar" aria-label="Search " v-model="searchQuery" @input="filtrarBusqueda"
                 aria-describedby="search-addon" />
               <button class="btn btn-outline-light my-3 my-sm-2" type="submit" @click.prevent="filtrarBusqueda" >
@@ -43,6 +40,10 @@
                 </svg>
               </button>
             </form>
+            <button type="button" class="btn btn-success  my-3 col-12 boton d-block d-lg-none" @click="cambiarFormulario()">
+                {{ mostrarFormulario ?
+                  "Ocultar" : "Crear" }}
+              </button>
               <CrearTareaComponent :alternative=true />
             <form v-if="mostrarFormulario" >
               <CrearTareaComponent :alternative=false />
