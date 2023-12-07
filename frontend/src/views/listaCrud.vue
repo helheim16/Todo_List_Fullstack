@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">{{correoAutenticado}}</a>
+              <a class="nav-link text-white">{{correoAutenticado}}</a>
             </li>
           </ul>
           <form class="row d-flex">

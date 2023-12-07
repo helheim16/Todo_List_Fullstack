@@ -1,4 +1,17 @@
 <template>
+    <!-- 
+    Este componente esta encargado de traer los items de la lista y organizarlos de manera adecuado
+    se trae informacion como 
+    - check (si la tarea esta completa o pendiente)
+    - titulo
+    - descripción
+    - icono estrella (que marca si la tarea es importante o no)
+    - btn/icono de editar 
+    - btn/icono de eliminar
+    estos elementos estan encerrados en una etiqueta llamada details 
+    los datos que queremos a mano se agregaron a la etiqueta summary 
+    y el resto por dentro del details y por fuera del summary
+    -->
     <a href="#" class="list-group-item list-group-item-action d-flex bd-highlight overflow-hidden">
         <details class="list-group-item d-flex bd-highlight p-0 overflow-hidden">
             <summary class="row container list-group-item d-flex text-start align-items-center justify-content-between">
@@ -63,6 +76,7 @@
 </template>
 
 <script lang="ts">
+// Importaciones de dependencias 
 import Vue from 'vue';
 import axios from 'axios';
 import { Component, Prop } from 'vue-property-decorator';
@@ -74,11 +88,11 @@ import Swal from 'sweetalert2';
 @Component({
 
 })
-
+//Metodos
 export default class TareaComponent extends Vue {
     @Prop() tarea!: Tarea;
 
-
+// funcion eliminar tarea del boton delete 
     async eliminarTarea(): Promise<void> {
         let config = {
             headers: {
@@ -90,6 +104,7 @@ export default class TareaComponent extends Vue {
             .then(res => {
                 switch (res.status) {
                     case 200:
+                    // Realiza un mensaje de exito al usuario 
                     const Toast = Swal.mixin({
                             toast: true,
                             position: "bottom-right",
@@ -112,6 +127,7 @@ export default class TareaComponent extends Vue {
                         bus.$emit('actualizarLista', '')
                         break;
                     case 500:
+                    // Realiza un mensaje de error al usuario   
                     Swal.fire({
                             icon: "error",
                             title: "Oops...",
@@ -130,7 +146,7 @@ export default class TareaComponent extends Vue {
                 console.error(`Error en request ${error}`);
             });
     }
-
+    // funcion marcar importante estrella  
     async toggleImportante(): Promise<void> {
         let config = {
             headers: {
@@ -154,7 +170,7 @@ export default class TareaComponent extends Vue {
                 console.error(`Error en request ${error}`);
             });
     }
-
+    // funcion check box  completo o pendiente
     async completarTarea(): Promise<void> {
         let config = {
             headers: {
@@ -178,7 +194,7 @@ export default class TareaComponent extends Vue {
                 console.error(`Error en request ${error}`);
             });
     }
-
+    // funcion actualizar tarea despues de editar
     async actualizarTarea(): Promise<void> {
         bus.$emit('editarTarea', {...this.tarea})
 

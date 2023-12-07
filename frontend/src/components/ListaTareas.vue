@@ -1,10 +1,12 @@
 <template>
+    <!-- realiza la seccion de cada tarea y trae el componente de CrearTarea -->
     <div class="list-group">
         <item-tarea v-for="tarea in tareas" :key="tarea._id" :tarea="tarea" />
     </div>
 </template>
 
 <script lang="ts">
+// Importaciones de dependencias 
 import Vue from 'vue';
 import Component from "vue-class-component";
 import axios from 'axios';
@@ -18,7 +20,7 @@ import { bus } from '../main';
         'item-tarea': TareaComponent
     }
 })
-
+//Metodos
 export default class ListaTareasComponent extends Vue {
 
     // Define propiedades
@@ -31,7 +33,7 @@ export default class ListaTareasComponent extends Vue {
     //     } else {
     //     }
     // }
-
+    // funcion que obtiene las taras desde la base de datos
     async obtenerTareas(filter?: String): Promise<void> {
        const usuario: String|undefined = getAuth().currentUser?.uid;
        

@@ -1,4 +1,6 @@
 <template>
+    <!-- Este componente es el footer que se vizualiza en ambas vistas 
+    contien la informacion de los desarrolladores y links a gitHub -->
     <div class="overflow-hidden text center footer">
         <div class=" row list-group-item d-flex  justify-content-between">
             <br>
@@ -42,6 +44,7 @@
 </template>
 
 <script lang="ts">
+// Importaciones de dependencias 
 import { Component, Vue } from "vue-property-decorator";
 
 export default class Footer extends Vue {

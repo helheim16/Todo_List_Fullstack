@@ -29,6 +29,8 @@
             </div>
         </div>
         <div class="row  justify-content-center">
+            <!-- se pasa evento click a los botones, tanto para guardar, editar y cancelar 
+            cada uno enlazado con su accion en cuestion -->
             <button v-if="editar" type="submit" class="btn  btn-outline-primary col-4  mx-2"
                 @click="editarTarea">Guardar</button>
             <button v-else type="submit" class="btn btn-primary col-6" @click="guardarTarea">Guardar</button>
@@ -37,7 +39,7 @@
         </div>
 
     </div>
-
+    <!-- cambia a la vista para resolucion de pantallas más pequeñas  -->
     <div v-else class="container my-4 card border-light listita addForm  boton d-block d-lg-none d-xl-none">
         <div class="mb-4">
             <h5 v-if="editar">Editar Tarea</h5>
@@ -69,12 +71,15 @@
 
         <button v-if="editar" type="submit" class="btn  btn-outline-primary col-4  mx-2"
             @click="editarTarea">Guardar</button>
+        <!-- se pasa evento click a los botones, tanto para guardar, editar y cancelar 
+            cada uno enlazado con su accion en cuestion -->
         <button v-else type="submit" class="btn btn-primary col-6" @click="guardarTarea">Guardar</button>
         <button v-if="editar" type="submit" class="btn  btn-outline-danger col-4  mx-2" @click="cancelar">Cancelar</button>
     </div>
 </template>
 
 <script lang="ts">
+// Importaciones de dependencias 
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import axios from 'axios';
@@ -86,7 +91,7 @@ import { bus } from '../main';
 
 @Component({
 })
-
+//Metodos
 export default class CrearTareaComponent extends Vue {
     // Define propiedades
     @Prop() alternative!: boolean;
@@ -119,7 +124,7 @@ export default class CrearTareaComponent extends Vue {
 
 
 
-
+    // funcion que comprueba que los campos estan vacios si lo estan salta un mensaje de error
     async postTarea(): Promise<void> {
         const usuario: String | undefined = getAuth().currentUser?.uid;
         if (!this.verificar()) {
@@ -140,7 +145,7 @@ export default class CrearTareaComponent extends Vue {
                 'Access-Control-Allow-Origin': '*'
             }
         }
-
+        // funcion que devuelve que se ha creado la nota con exito o no
         await axios.post(`http://127.0.0.1:3000/tarea`, { ...this.datosForm, user: usuario }, config)
             .then(res => {
                 this.datosForm.title = '';
@@ -150,6 +155,7 @@ export default class CrearTareaComponent extends Vue {
 
                 switch (res.status) {
                     case 201:
+                    // Realiza un mensaje de exito al usuario 
                         const Toast = Swal.mixin({
                             toast: true,
                             position: "bottom-right",
@@ -172,6 +178,7 @@ export default class CrearTareaComponent extends Vue {
                         bus.$emit('actualizarLista', '')
                         break;
                     case 500:
+                    // Realiza un mensaje de error al usuario 
                         Swal.fire({
                             icon: "error",
                             title: "Oops...",
@@ -192,7 +199,7 @@ export default class CrearTareaComponent extends Vue {
                 console.error(`Error en request ${error}`);
             });
     }
-
+        // funcion que realiza la edicion de la tarea
     async editarTarea(): Promise<void> {
         const usuario: String | undefined = getAuth().currentUser?.uid;
 
@@ -223,6 +230,7 @@ export default class CrearTareaComponent extends Vue {
                                 toast.onmouseleave = Swal.resumeTimer;
                             }
                         });
+                        // Realiza un mensaje de exito al usuario 
                         Toast.fire({
                             icon: "success",
                             iconColor: '#3df385',
@@ -234,6 +242,7 @@ export default class CrearTareaComponent extends Vue {
                         bus.$emit('actualizarLista', '')
                         break;
                     case 500:
+                    // Realiza un mensaje de error al usuario 
                         Swal.fire({
                             icon: "error",
                             title: "Oops...",
