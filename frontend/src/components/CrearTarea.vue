@@ -1,4 +1,5 @@
 <template>
+    <!-- Se muestra al costado de la lista -->
     <div v-if=alternative class="container my-4 card border-light listita addForm d-none d-lg-block d-xl-block">
         <!-- <div v-if=alternative class="container my-4 card border-light listita addForm boton d-none d-sm d-md-block d-sm-block d-xl-none"> -->
         <div class="mb-4">
@@ -28,16 +29,14 @@
                 <label class="form-check-label" for="importante">Importante</label>
             </div>
         </div>
-        <div class="row  justify-content-center">
-            <button v-if="editar" type="submit" class="btn  btn-outline-primary col-4  mx-2"
-                @click="editarTarea">Guardar</button>
+        <div class="row justify-content-center">
+            <button v-if="editar" type="submit" class="btn  btn-outline-primary col-5 mx-1 mx-lg-2" @click="editarTarea">Guardar</button>
             <button v-else type="submit" class="btn btn-primary col-6" @click="guardarTarea">Guardar</button>
-            <button v-if="editar" type="submit" class="btn  btn-outline-danger col-4  mx-2"
-                @click="cancelar">Cancelar</button>
+            <button v-if="editar" type="submit" class="btn  btn-outline-danger col-5 mx-1 mx-lg-2" @click="cancelar">Cancelar</button>
         </div>
-
     </div>
-
+    
+    <!-- Se muestra sobre de la lista -->
     <div v-else class="container my-4 card border-light listita addForm  boton d-block d-lg-none d-xl-none">
         <div class="mb-4">
             <h5 v-if="editar">Editar Tarea</h5>
@@ -67,9 +66,11 @@
             </div>
         </div>
 
-        <button v-if="editar" type="submit" class="btn btn-primary" @click="editarTarea">Guardara</button>
-        <button v-else type="submit" class="btn btn-primary" @click="guardarTarea">Guardar</button>
-        <button v-if="editar" type="submit" class="btn btn-primary" @click="cancelar">Cancelar</button>
+        <div class="row justify-content-center">
+            <button v-if="editar" type="submit" class="btn  btn-outline-primary col-4  mx-2" @click="editarTarea">Guardar</button>
+            <button v-else type="submit" class="btn btn-primary col-6" @click="guardarTarea">Guardar</button>
+            <button v-if="editar" type="submit" class="btn  btn-outline-danger col-4  mx-2" @click="cancelar">Cancelar</button>
+        </div>
     </div>
 </template>
 
@@ -101,23 +102,18 @@ export default class CrearTareaComponent extends Vue {
         important: false,
     }
 
-
     // Define metodos
     guardarTarea(): void {
         this.postTarea()
     }
+
     verificar(): boolean {
         if (!this.datosForm.title.trim() || !this.datosForm.desc.trim()) {
             return (false);
-
         } else {
             return (true);
         }
     }
-
-
-
-
 
     async postTarea(): Promise<void> {
         const usuario: String | undefined = getAuth().currentUser?.uid;
@@ -168,7 +164,7 @@ export default class CrearTareaComponent extends Vue {
                             title: "¡Buen trabajo!",
                             text: "Se ha creado con exito",
                         });
-                        bus.$emit('actualizarLista', '')
+                        bus.$emit('actualizarLista');
                         break;
                     case 500:
                         Swal.fire({
@@ -180,8 +176,6 @@ export default class CrearTareaComponent extends Vue {
                             background: " #6843c3",
                             confirmButtonColor: "#3df385  ",
                         });
-                        // msg error al crear
-                        // alert('Error al crear tarea')
                         break;
                     default:
                         break;
@@ -230,7 +224,7 @@ export default class CrearTareaComponent extends Vue {
                             title: "¡Buen trabajo!",
                             text: "Se ha editado correctamente",
                         });
-                        bus.$emit('actualizarLista', '')
+                        bus.$emit('actualizarLista')
                         break;
                     case 500:
                         Swal.fire({
@@ -242,8 +236,6 @@ export default class CrearTareaComponent extends Vue {
                             background: " #6843c3",
                             confirmButtonColor: "#3df385  ",
                         });
-                        // msg error al crear
-                        // alert('Error al crear tarea')
                         break;
                     default:
                         break;
@@ -262,14 +254,8 @@ export default class CrearTareaComponent extends Vue {
     mounted() {
         bus.$on('editarTarea', (tarea: Tarea) => {
             this.editar = true;
-            this.tarea = tarea;
-            this.datosForm = {
-                title: this.tarea.title,
-                desc: this.tarea.desc,
-                completed: this.tarea.completed,
-                important: this.tarea.important,
-            };
-            console.log(this.datosForm)
+            this.tarea = {...tarea};
+            this.datosForm = {...tarea};
         });
         bus.$on('actualizarLista', () => {
             this.editar = false;
@@ -281,7 +267,6 @@ export default class CrearTareaComponent extends Vue {
                 important: false,
             };
         });
-
     }
 }
 </script>

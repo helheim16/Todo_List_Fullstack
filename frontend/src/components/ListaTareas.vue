@@ -24,14 +24,6 @@ export default class ListaTareasComponent extends Vue {
     // Define propiedades
     tareas: Tarea[] = [];
 
-    // Define metodos
-    // async listarTareas(filter?: String): Promise<void> {
-    //     if (!filter) {
-    //         this.obtenerTareas(filter);
-    //     } else {
-    //     }
-    // }
-
     async obtenerTareas(filter?: String): Promise<void> {
        const usuario: String|undefined = getAuth().currentUser?.uid;
        

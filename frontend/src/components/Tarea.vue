@@ -144,8 +144,6 @@ export default class TareaComponent extends Vue {
                     case 200:
                         bus.$emit('actualizarLista', )
                         break;
-                    case 500:
-                        break;
                     default:
                         break;
                 }
@@ -168,8 +166,6 @@ export default class TareaComponent extends Vue {
                     case 200:
                         bus.$emit('actualizarLista', )
                         break;
-                    case 500:
-                        break;
                     default:
                         break;
                 }
@@ -180,7 +176,7 @@ export default class TareaComponent extends Vue {
     }
 
     async actualizarTarea(): Promise<void> {
-        bus.$emit('editarTarea', {...this.tarea})
+        bus.$emit('editarTarea', {...this.tarea});
 
     }
 }

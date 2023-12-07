@@ -89,7 +89,6 @@ export default class Registro extends Vue {
     signInWithEmailAndPassword(auth, this.email, this.password)
       .then((credenciales) => {
         const user = credenciales.user;
-        console.log(user);
         Swal.fire({
           title: "¡Buen trabajo!",
           text: "Inicio de sesión Exitoso",
