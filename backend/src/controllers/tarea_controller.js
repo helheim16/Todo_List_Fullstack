@@ -18,7 +18,6 @@ const tareaController = {
     obtenerTareasFiltradas: async (req, res) => {
         const idUsuario = req.params.id;
         const filter = req.params.filter;
-        console.log(`id ${idUsuario} === filter ${filter}`)
 
         try {
             const tareas = await Tarea.find({user: idUsuario, title: new RegExp(filter, 'i') });
@@ -33,7 +32,6 @@ const tareaController = {
     },
 
     crearTarea: async (req, res) => {
-        // console.log(req.body)
         const { title, desc, completed, important, user } = req.body;
         
         try {

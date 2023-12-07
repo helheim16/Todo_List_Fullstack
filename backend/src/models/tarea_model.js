@@ -12,4 +12,5 @@ const tareaSchema = new mongoose.Schema({
 
 const Tarea = mongoose.model('Tarea', tareaSchema);
 
+// Schema Tarea
 module.exports = Tarea;

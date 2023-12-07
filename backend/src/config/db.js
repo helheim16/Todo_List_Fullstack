@@ -12,3 +12,6 @@ const db = async () => {
 }
 
 module.exports = db;
+
+
+// Realiza la conexion con la base de datos
