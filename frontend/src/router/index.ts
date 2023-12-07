@@ -1,33 +1,20 @@
-import Vue from 'vue'
-import VueRouter, { NavigationGuard, RouteConfig } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import { auth } from '../../firebaseconfig'
-// import Login from '../components/logRes.vue';
+// Importo dependecias que se implemantaran 
+import Vue from 'vue';
+import VueRouter, { NavigationGuard, RouteConfig } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
 import Lista from "../views/listaCrud.vue";
 import { getAuth } from 'firebase/auth';
 
 Vue.use(VueRouter);
-
-
-// // guarda la navegacion para verficar la autentificacioón 
-// const requireAuth: NavigationGuard = function (to, from,next){
-//   const isAuthenticated = auth.currentUser; 
-//   if(isAuthenticated){
-//     // si el usaurio esta autentidaco, permite el acceso a la ruta 
-//     next();
-//   }
-//   else{
-//     // si el usuario no esta autentificado, redirige a la pagina de inicar sesion 
-//     next('/');
-//   }
-// };
-
+// Declaro como van hacer las rutas 
 const routes: Array<RouteConfig> = [
+  // seccion login y registro
   {
     path: '/',
     name: 'login',
     component: HomeView
   },
+  // seccion de lista/crud
   {
     path: '/lista',
     name: 'lista',
@@ -36,7 +23,7 @@ const routes: Array<RouteConfig> = [
     
   }
 ]
-
+// Declaro rotes
 const router = new VueRouter({
   routes
 })
@@ -60,4 +47,5 @@ router.beforeEach((to, from, next) => {
   }
 });
 
+// exporto por defecto la antes declarada router
 export default router
