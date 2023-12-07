@@ -1,6 +1,5 @@
 <template>
-    <!-- Este componente es el footer que se vizualiza en ambas vistas 
-    contien la informacion de los desarrolladores y links a gitHub -->
+    <!-- Este componente es el footer, contie la informacion de los desarrolladores y links a gitHub -->
     <div class="overflow-hidden text center footer">
         <div class=" row list-group-item d-flex  justify-content-between">
             <br>
